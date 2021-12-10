@@ -1,0 +1,99 @@
+.bgLogin {
+  background-image: url(../images/bg.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.transparent {
+  background-color: rgba(252, 252, 252, 0.5);
+}
+
+.padding12 {
+  padding-top: 12.5rem;
+  padding-bottom: 12.5rem;
+}
+
+.brownBoldFont {
+  font-size: 2em;
+  color: #814e4e;
+  font-weight: bold;
+}
+
+.brownSoftFont {
+  font-size: 2rem;
+  color: #814e4e;
+}
+
+.blacksoftFont {
+  font-size: 2rem;
+  color: #000;
+}
+
+.formInputBox {
+  border: 1.5px solid black !important;
+}
+
+.greySoftText {
+  text-decoration: none;
+  color: #b7afaf !important;
+  text-decoration: none;
+}
+
+.greySoftBoldText {
+  text-decoration: none;
+  color: #8e8b8b !important;
+  font-weight: bold;
+}
+
+.button {
+  background-color: #9c8181;
+  border-radius: 1rem;
+}
+
+.bgRegistration {
+  background-image: url(../images/bg2.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.footerPad {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+.bgFooter {
+  background-color: #9ab059;
+}
+
+.bgnav {
+  background-color: #274e00;
+}
+
+.bgBaseColour {
+  background-color: #fffce5;
+}
+
+.btnLink {
+  background-color: rgb(255, 212, 132);
+  border-radius: 1em;
+}
+
+.btnOut {
+  background-color: #e46e91;
+  border-radius: 1em;
+  width: min-content;
+}
+
+.linkTxtColor {
+  color: #000;
+  text-decoration: none;
+}
+
+.bgp {
+  background-image: url(../images/bgp.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
