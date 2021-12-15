@@ -91,9 +91,39 @@
   text-decoration: none;
 }
 
+.linkTxtColorBold {
+  color: #000;
+  text-decoration: none;
+  font-weight: bold;
+}
+
 .bgp {
   background-image: url(../images/bgp.jpg);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+.linkMngeUser {
+  background-color: rgba(202, 170, 170, 0.856);
+  border-radius: 1rem;
+  border-color: rgba(202, 170, 170, 0.856);
+}
+
+.linkMngeCat {
+  background-color: rgb(255, 212, 132);
+  border-radius: 1rem;
+  border-color: rgb(255, 212, 132);
+}
+
+.linkMngeProd {
+  background-color: rgba(144, 196, 115, 0.856);
+  border-radius: 1rem;
+  border-color: rgba(144, 196, 115, 0.856);
+}
+
+.linkMngeOrder {
+  background-color: rgb(134, 163, 207);
+  border-radius: 1rem;
+  border-color: rgb(134, 163, 207);
 }

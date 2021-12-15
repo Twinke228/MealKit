@@ -17,8 +17,8 @@ const ContactPage = () => {
       <Container className="mt-5 pb-5">
         <div className="row">
           <div className="col-lg-7 mb-3">
-            <p className="brownBoldFont">Have any questions?</p>
-            <p>
+            <p className="brownBoldFont mb-0">Have any questions?</p>
+            <p className="mb-3">
               Type your question into our virtual assistant who will help you
               find an answer to your question or put you in touch with our
               friendly customer care team.
@@ -53,7 +53,7 @@ const ContactPage = () => {
                 </Row>
 
                 <button
-                  className="w-100 mb-3 button"
+                  className="w-100 mb-5 mt-5 button"
                   onClick={contactForm}
                   type="submit"
                 >

@@ -17,8 +17,8 @@ const WeAreMealKit = () => {
           ></iframe>
           <p className="greySoftText">Hello Fresh (2017)</p>
         </div>
-        <div className="col-lg-6 justify-content-around">
-          <p className="greySoftText">Since Year 2021</p>
+        <div className="col-lg-6 justify-content-around mt-5">
+          <p className="greySoftText mb-0">Since Year 2021</p>
           <p className="brownBoldFont">
             We Are{" "}
             <p

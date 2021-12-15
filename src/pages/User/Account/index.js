@@ -5,9 +5,11 @@ import SmallBanner from "../../../components/smallBanner";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { useAuth } from "../../../contexts/AuthContext";
 
 const AccountPage = () => {
   const navigate = useNavigate();
+  const { logout } = useAuth();
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -17,6 +19,7 @@ const AccountPage = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const logoutUser = () => {
+    logout();
     navigate("../");
   };
   const feedback = () => {

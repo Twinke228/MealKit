@@ -8,7 +8,9 @@ import AboutUsPage from "../pages/User/AboutUs";
 import ContactPage from "../pages/User/ContactUs";
 import FeedbackPage from "../pages/User/Feedback";
 import ProductCataloguePage from "../pages/User/ProductCatalogue";
-import ManageUserPage from "../pages/Admin/ManageUser.js";
+import IndividualProductPage from "../pages/User/IndividualProduct/Index";
+import ManageUserPage from "../pages/Admin/ManageUser";
+import MngProductPage from "../pages/Admin/ManageProduct";
 
 const MealkitRouter = () => {
   return (
@@ -22,8 +24,10 @@ const MealkitRouter = () => {
       <Route path="contact" element={<ContactPage />} />
       <Route path="feedback" element={<FeedbackPage />} />
       <Route path="productcatalogue" element={<ProductCataloguePage />} />
+      <Route path="individualproduct" element={<IndividualProductPage />} />
       {/* admin */}
       <Route path="manageuser" element={<ManageUserPage />} />
+      <Route path="manageproduct" element={<MngProductPage />} />
     </Routes>
   );
 };

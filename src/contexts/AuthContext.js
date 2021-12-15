@@ -4,9 +4,8 @@ import {
   signOut,
 } from "@firebase/auth";
 import React, { useContext, useState, useEffect, createContext } from "react";
-import { doc, setDoc } from "firebase/firestore";
+import { collection, doc, setDoc, addDoc } from "firebase/firestore";
 import { auth, db } from "../api/firebase";
-import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
@@ -15,7 +14,6 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }) => {
-  const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
 
@@ -36,13 +34,22 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
+  const addNewUser = async (firstName, lastName, email, phoneNumber) => {
+    const docRef = await addDoc(collection(db, "users"), {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      phoneNumber: phoneNumber,
+    });
+    console.log("This is the ID: ", docRef.id);
+  };
+
   const login = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
   const logout = () => {
     signOut(auth);
-    navigate("/");
   };
 
   useEffect(() => {
@@ -55,6 +62,7 @@ export const AuthProvider = ({ children }) => {
 
   const value = {
     currentUser,
+    addNewUser,
     signup,
     login,
     logout,

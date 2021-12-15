@@ -40,7 +40,7 @@ const RegisterPage = () => {
         >
           <div className="col-lg-4 offset-lg-4">
             <Form>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Group className="mb-3" controlId="registerFormFname">
                 <Form.Control
                   className="p-2 formInputBox"
                   type="text"
@@ -49,7 +49,7 @@ const RegisterPage = () => {
                   value={firstName}
                 />
               </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Group className="mb-3" controlId="registerFormLname">
                 <Form.Control
                   className="p-2 formInputBox"
                   type="text"
@@ -58,7 +58,7 @@ const RegisterPage = () => {
                   value={lastName}
                 />
               </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Group className="mb-3" controlId="registerFormEmail">
                 <Form.Control
                   className="p-2 formInputBox"
                   type="text"
@@ -67,7 +67,7 @@ const RegisterPage = () => {
                   value={email}
                 />
               </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Group className="mb-3" controlId="registerFormPhoneNo">
                 <Form.Control
                   className="p-2 formInputBox"
                   type="text"
@@ -76,7 +76,7 @@ const RegisterPage = () => {
                   value={phoneNumber}
                 />
               </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Form.Group className="mb-3" controlId="registerFormPassword">
                 <Form.Control
                   className="p-2 formInputBox"
                   type="password"
@@ -85,7 +85,7 @@ const RegisterPage = () => {
                   value={password}
                 />
               </Form.Group>
-              <Form.Group className="mb-5" controlId="formBasicPassword">
+              <Form.Group className="mb-5" controlId="registerFormCnfrmPass">
                 <Form.Control
                   className="p-2 formInputBox"
                   type="password"
@@ -101,6 +101,7 @@ const RegisterPage = () => {
               >
                 Submit
               </button>
+
               <p className="text-center greySoftText">
                 ALready a member?
                 <Link className="greySoftBoldText" to="/">

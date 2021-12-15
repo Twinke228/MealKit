@@ -7,16 +7,13 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import Logo from "../assets/images/logo.png";
-import { Link } from "react-router-dom";
 
 const MealkitNavbar = () => {
   return (
     <Navbar className="bgnav" variant="dark" expand="lg">
       <Container>
-        <Navbar.Brand href="/">
-          <Link to="/home">
-            <img src={Logo} alt="meal kit logo" style={{ width: "6rem" }} />
-          </Link>
+        <Navbar.Brand href="/home">
+          <img src={Logo} alt="meal kit logo" style={{ width: "6rem" }} />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

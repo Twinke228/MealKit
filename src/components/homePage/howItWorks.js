@@ -9,7 +9,7 @@ import Hit4 from "../../assets/images/hit4.jpg";
 const HowItWorks = () => {
   return (
     <Container className="mt-5">
-      <p className="brownBoldFont text-center">
+      <p className="brownBoldFont text-center mb-0">
         How it{" "}
         <p
           style={{
@@ -23,7 +23,7 @@ const HowItWorks = () => {
       <p className="text-center p-0">
         Choose recipes / Pre-measured ingredients / Delivered
       </p>
-      <div className="row pb-5">
+      <div className="row pb-5 pt-3">
         <div className="col-lg-3 mt-2">
           <Card>
             <Card.Img variant="top" src={Hit1} />
