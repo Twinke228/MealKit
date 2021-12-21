@@ -127,3 +127,14 @@
   border-radius: 1rem;
   border-color: rgb(134, 163, 207);
 }
+
+.table-wrap {
+  height: 30rem;
+  width: 100%;
+  overflow-x: scroll;
+}
+
+.buttonMini {
+  background-color: transparent;
+  border-style: none;
+}

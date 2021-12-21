@@ -8,6 +8,7 @@ import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from "../../../contexts/AuthContext";
 
 const AccountPage = () => {
+  //constances
   const navigate = useNavigate();
   const { logout } = useAuth();
 
@@ -18,17 +19,23 @@ const AccountPage = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  // logout user
   const logoutUser = () => {
     logout();
     navigate("../");
   };
+
+  // direct to feedback page
   const feedback = () => {
     navigate("../feedback");
   };
+
+  //direct to tracking order
   const trackingOrder = () => {
     navigate("../trackingorder");
   };
 
+  //edit personal details
   const editUserProfile = () => {
     if (
       firstName !== "" &&

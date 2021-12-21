@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Container, Form, Row, Col } from "react-bootstrap";
+import { Col, Container, Form, Row } from "react-bootstrap";
 import "../../assets/design/styles.css";
-import { List, ListItem, ListItemText } from "@mui/material";
 import { useAuth } from "../../contexts/AuthContext";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { List, ListItem, ListItemText } from "@mui/material";
+import { storage } from "../../api/firebase";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
 import { toast, ToastContainer } from "react-toastify";
 
-const MngProductForm = () => {
+const UpdateProduct = (props) => {
   //constants
   const [ingredientName, setIngredientName] = useState("");
   const [ingredientQty, setIngredientsQty] = useState("");
@@ -25,9 +25,28 @@ const MngProductForm = () => {
   const [imageUrl, setImageUrl] = useState("");
 
   useEffect(() => {
-    if (imageUrl !== "") {
+    if (props.product.productName !== "") {
+      setProductName(props.product.productName);
     }
-  }, [imageUrl]);
+    if (props.product.productPrice !== "") {
+      setProductPrice(props.product.productPrice);
+    }
+    if (props.product.productStock !== "") {
+      setProductStock(props.product.productStock);
+    }
+    if (props.product.productDescription !== "") {
+      setProductDescription(props.product.productDescription);
+    }
+    if (props.product.productCategory !== "") {
+      setProductCategory(props.product.productCategory);
+    }
+    if (props.product.ingredients !== "") {
+      setIngredients(props.product.ingredients);
+    }
+    if (props.product.instructions !== "") {
+      setInstruction(props.product.instructions);
+    }
+  }, []);
 
   //to delete the ingredients row (+)
   const deleteIngredientRow = (id) => {
@@ -49,8 +68,32 @@ const MngProductForm = () => {
     }
   };
 
-  //passing product values to add product function and save images to firestore with appropriate link
-  const { addProduct } = useAuth();
+  //save images to firebase storage with appropraite link
+  const handleUploadImage = () => {
+    const uploadImage = storage
+      .ref(`images/${productImage.name}`)
+      .put(productImage);
+    uploadImage.on(
+      "state_changed",
+      (snapshot) => {},
+      (error) => {
+        console.log(error);
+      },
+      () => {
+        storage
+          .ref("images")
+          .child(productImage.name)
+          .getDownloadURL()
+          .then((url) => {
+            console.log("image change link", url);
+            setImageUrl(url);
+          });
+      }
+    );
+  };
+
+  //passing product values to update product function
+  const { updateProduct } = useAuth();
   const createProduct = async () => {
     if (
       productImage !== "" &&
@@ -62,29 +105,23 @@ const MngProductForm = () => {
       ingredients.length !== 0 &&
       instructions.length !== 0
     ) {
-      const storageDb = getStorage();
-      const productImageRef = ref(storageDb, `images/${productImage.name}`);
-      await uploadBytes(productImageRef, productImage).then((snapshot) => {
-        console.log("Uploaded the image!");
-      });
-      await getDownloadURL(ref(storageDb, productImageRef)).then((url) => {
-        console.log("This us the URL! ", url);
-        addProduct(
-          url,
-          productName,
-          productPrice,
-          productStock,
-          productDescription,
-          productCategory,
-          ingredients,
-          instructions
-        );
-      });
-      console.log("successfully added new product to firestore");
-      toast.success("Upload New Product Successfully");
+      handleUploadImage();
+      console.log("image url: ", imageUrl);
+      await updateProduct(
+        imageUrl,
+        productName,
+        productPrice,
+        productStock,
+        productDescription,
+        productCategory,
+        ingredients,
+        instructions
+      );
+      console.log("Update Product Successfully");
+      toast.success("Update Product Successfully");
     } else {
-      console.log("Error - unable to add value to firestore");
-      toast.error("Upload New Product Unsuccessfully");
+      console.log("Unable to update product");
+      toast.error("Unable to update product");
     }
   };
 
@@ -104,6 +141,7 @@ const MngProductForm = () => {
             className="p-2 mb-3 formInputBox"
             type="text"
             placeholder="Product Name"
+            value={productName}
             onChange={(event) => {
               setProductName(event.target.value);
             }}
@@ -114,6 +152,7 @@ const MngProductForm = () => {
             className="p-2 mb-3 formInputBox"
             type="text"
             placeholder="Price"
+            value={productPrice}
             onChange={(event) => {
               setProductPrice(event.target.value);
             }}
@@ -124,6 +163,7 @@ const MngProductForm = () => {
             className="p-2 mb-3 formInputBox"
             type="number"
             placeholder="Stock"
+            value={productStock}
             onChange={(event) => {
               setProductStock(event.target.value);
             }}
@@ -135,6 +175,7 @@ const MngProductForm = () => {
             as="textarea"
             rows={3}
             placeholder="Description"
+            value={productDescription}
             onChange={(event) => {
               setProductDescription(event.target.value);
             }}
@@ -143,6 +184,7 @@ const MngProductForm = () => {
         <Form.Group>
           <Form.Select
             className="p-2 mb-3 formInputBox"
+            value={productCategory}
             onChange={(event) => {
               setProductCategory(event.target.value);
             }}
@@ -282,7 +324,7 @@ const MngProductForm = () => {
                 type="button"
                 onClick={createProduct}
               >
-                Add Menu
+                Update Menu
               </button>
             </div>
           </div>
@@ -292,4 +334,4 @@ const MngProductForm = () => {
   );
 };
 
-export default MngProductForm;
+export default UpdateProduct;

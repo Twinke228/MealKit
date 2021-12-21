@@ -1,5 +1,6 @@
 import MealkitRouter from "./navigations/MealkitRouter";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "react-toastify/dist/ReactToastify.css";
 import MealkitNavbar from "./components/MealkitNavbar";
 import Footer from "./components/Footer";
 import { AuthProvider } from "./contexts/AuthContext";

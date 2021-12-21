@@ -3,8 +3,10 @@ import { Container, Form } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../contexts/AuthContext";
 import "../../../assets/design/styles.css";
+import { toast, ToastContainer } from "react-toastify";
 
 const RegisterPage = () => {
+  //constances
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -16,6 +18,7 @@ const RegisterPage = () => {
 
   const navigate = useNavigate();
 
+  //passing values to signup function
   const registerUser = () => {
     if (
       firstName !== "" &&
@@ -26,12 +29,14 @@ const RegisterPage = () => {
       confirmPassword !== ""
     ) {
       signup(firstName, lastName, email, phoneNumber, password);
+      toast.success("Registered Successfully");
       navigate("/");
     }
   };
 
   return (
     <Container fluid className="bgRegistration">
+      <ToastContainer />
       <div className="row justify-center transparent">
         <p className=" text-center pt-5 brownBoldFont">Registration</p>
         <div
@@ -42,6 +47,7 @@ const RegisterPage = () => {
             <Form>
               <Form.Group className="mb-3" controlId="registerFormFname">
                 <Form.Control
+                  required
                   className="p-2 formInputBox"
                   type="text"
                   placeholder="First name"
@@ -51,6 +57,7 @@ const RegisterPage = () => {
               </Form.Group>
               <Form.Group className="mb-3" controlId="registerFormLname">
                 <Form.Control
+                  required
                   className="p-2 formInputBox"
                   type="text"
                   placeholder="Last name"
@@ -60,8 +67,9 @@ const RegisterPage = () => {
               </Form.Group>
               <Form.Group className="mb-3" controlId="registerFormEmail">
                 <Form.Control
+                  required
                   className="p-2 formInputBox"
-                  type="text"
+                  type="email"
                   placeholder="Email"
                   onChange={(e) => setEmail(e.target.value)}
                   value={email}
@@ -78,6 +86,7 @@ const RegisterPage = () => {
               </Form.Group>
               <Form.Group className="mb-3" controlId="registerFormPassword">
                 <Form.Control
+                  required
                   className="p-2 formInputBox"
                   type="password"
                   placeholder="Password"
@@ -87,6 +96,7 @@ const RegisterPage = () => {
               </Form.Group>
               <Form.Group className="mb-5" controlId="registerFormCnfrmPass">
                 <Form.Control
+                  required
                   className="p-2 formInputBox"
                   type="password"
                   placeholder="Confirm password"
@@ -103,7 +113,7 @@ const RegisterPage = () => {
               </button>
 
               <p className="text-center greySoftText">
-                ALready a member?
+                Already a member?
                 <Link className="greySoftBoldText" to="/">
                   {" "}
                   Login Here!

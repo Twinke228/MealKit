@@ -3,32 +3,35 @@ import { Container, Form } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import "../../assets/design/styles.css";
+import { toast, ToastContainer } from "react-toastify";
 
 const LoginPage = () => {
+  //constants
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  // for checking if user are eligible to login or access to the page
   const { currentUser, login } = useAuth();
   const navigate = useNavigate();
-  const loginUser = () => {
-    login(email, password);
-    navigate("/home");
-  };
 
-  console.log("Current User: ", currentUser);
+  const loginUser = () => {
+    if (email !== "" && password !== "") {
+      login(email, password);
+      toast.success("Login Successfully");
+      navigate("/home");
+    } else {
+      toast.error("Login Failed");
+      navigate("/");
+    }
+  };
 
   if (currentUser !== null) {
     navigate("/home");
-  } else {
-    navigate("/");
-  }
-
-  if (email !== "" && password !== "") {
-    return loginUser;
   }
 
   return (
     <Container fluid className="bgLogin">
+      <ToastContainer />
       <div className="row justify-center transparent">
         <div className="row justify-center padding12">
           <div className="col-lg-3 offset-lg-3">
