@@ -7,8 +7,29 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import Logo from "../assets/images/logo.png";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 
 const MealkitNavbar = () => {
+  const { currentUser } = useAuth();
+  const navigate = useNavigate();
+
+  const checkUserBeforeAcc = () => {
+    if (currentUser !== null) {
+      navigate("/account");
+    } else {
+      navigate("/");
+    }
+  };
+
+  const checkUserBeforeCart = () => {
+    if (currentUser !== null) {
+      navigate("/cart");
+    } else {
+      navigate("/");
+    }
+  };
+
   return (
     <Navbar className="bgnav" variant="dark" expand="lg">
       <Container>
@@ -27,10 +48,10 @@ const MealkitNavbar = () => {
             <Nav.Link href="/search">
               <FontAwesomeIcon icon={faSearch} />
             </Nav.Link>
-            <Nav.Link href="/cart">
+            <Nav.Link onClick={checkUserBeforeCart}>
               <FontAwesomeIcon icon={faShoppingCart} />
             </Nav.Link>
-            <Nav.Link href="/account">
+            <Nav.Link onClick={checkUserBeforeAcc}>
               <FontAwesomeIcon icon={faUser} />
             </Nav.Link>
           </Nav>

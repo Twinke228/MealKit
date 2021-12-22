@@ -22,12 +22,6 @@ const MngProductForm = () => {
   const [productDescription, setProductDescription] = useState("");
   const [productCategory, setProductCategory] = useState("Chinese");
   const [productImage, setProductImage] = useState(null);
-  const [imageUrl, setImageUrl] = useState("");
-
-  useEffect(() => {
-    if (imageUrl !== "") {
-    }
-  }, [imageUrl]);
 
   //to delete the ingredients row (+)
   const deleteIngredientRow = (id) => {

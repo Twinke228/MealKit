@@ -3,6 +3,7 @@ import {
   signInWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
+  sendPasswordResetEmail,
 } from "@firebase/auth";
 import React, { useContext, useState, useEffect, createContext } from "react";
 import {
@@ -61,9 +62,31 @@ export const AuthProvider = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-  //signing our user
+  //signing out user
   const logout = () => {
     signOut(auth);
+  };
+
+  //forget password
+  const forgetPassword = async (email) => {
+    console.log("email ", email);
+    await sendPasswordResetEmail(auth, email)
+      .then(() => {
+        alert("Password reset link sent!");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+    // try {
+    //   sendPasswordResetEmail(auth, email, {
+    //     url: "http://localhost:3000/",
+    //   });
+    //   alert("Password reset link sent!");
+    // } catch (err) {
+    //   console.error(err);
+    //   alert(err.message);
+    // }
   };
 
   //add new user to firestore
@@ -103,6 +126,7 @@ export const AuthProvider = ({ children }) => {
 
   //Update product
   const updateProduct = async (
+    productId,
     productImage,
     productName,
     productPrice,
@@ -112,7 +136,7 @@ export const AuthProvider = ({ children }) => {
     ingredients,
     instructions
   ) => {
-    const docRef = await updateDoc(collection(db, "products"), {
+    const docRef = await updateDoc(doc(db, "products", productId), {
       productImage: productImage,
       productName: productName,
       productPrice: productPrice,
@@ -121,8 +145,13 @@ export const AuthProvider = ({ children }) => {
       productCategory: productCategory,
       ingredients: ingredients,
       instructions: instructions,
-    });
-    console.log("Successfully update product: ", docRef.productName);
+    })
+      .then(() => {
+        console.log("Successfully update product: ", productName);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   //delete product
@@ -140,6 +169,7 @@ export const AuthProvider = ({ children }) => {
     signup,
     login,
     logout,
+    forgetPassword,
   };
 
   return (

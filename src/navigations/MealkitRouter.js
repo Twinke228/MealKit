@@ -11,6 +11,7 @@ import ProductCataloguePage from "../pages/User/ProductCatalogue";
 import IndividualProductPage from "../pages/User/IndividualProduct/Index";
 import ManageUserPage from "../pages/Admin/ManageUser";
 import MngProductPage from "../pages/Admin/ManageProduct";
+import ForgetPasswordPage from "../pages/User/ForgetPassword";
 
 const MealkitRouter = () => {
   return (
@@ -25,6 +26,8 @@ const MealkitRouter = () => {
       <Route path="feedback" element={<FeedbackPage />} />
       <Route path="productcatalogue" element={<ProductCataloguePage />} />
       <Route path="individualproduct" element={<IndividualProductPage />} />
+      <Route path="forgetpassword" element={<ForgetPasswordPage />} />
+
       {/* admin */}
       <Route path="manageuser" element={<ManageUserPage />} />
       <Route path="manageproduct" element={<MngProductPage />} />

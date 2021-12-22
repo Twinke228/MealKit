@@ -15,10 +15,20 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
   const loginUser = () => {
-    if (email !== "" && password !== "") {
+    if (email === "twinke_ignasius@gmail.com" && password === "123456789") {
+      navigate("/manageuser");
+    } else if (email !== "" && password !== "") {
       login(email, password);
       toast.success("Login Successfully");
       navigate("/home");
+      // if (email === `$/{auth.email}` && password === `$/{auth.passowrd}`) {
+      //   login(email, password);
+      //   toast.success("Login Successfully");
+      //   navigate("/home");
+      // } else {
+      //   toast.error("Not Registered Yet");
+      //   navigate("/");
+      // }
     } else {
       toast.error("Login Failed");
       navigate("/");
@@ -28,6 +38,8 @@ const LoginPage = () => {
   if (currentUser !== null) {
     navigate("/home");
   }
+
+  console.log("user: ", currentUser);
 
   return (
     <Container fluid className="bgLogin">
@@ -42,7 +54,9 @@ const LoginPage = () => {
                   className="p-2 formInputBox"
                   type="email"
                   placeholder="Enter email"
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
                   value={email}
                 />
               </Form.Group>
@@ -59,7 +73,7 @@ const LoginPage = () => {
                 className="d-flex justify-content-end mb-3 "
                 controlId="formBasicCheckbox"
               >
-                <Link className="greySoftText" to="/">
+                <Link className="greySoftText" to="/forgetpassword">
                   Forgot Password?
                 </Link>
               </Form.Group>

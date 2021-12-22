@@ -6,7 +6,7 @@ import "../../../assets/design/styles.css";
 import { toast, ToastContainer } from "react-toastify";
 
 const RegisterPage = () => {
-  //constances
+  //constants
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");

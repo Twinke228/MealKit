@@ -7,6 +7,7 @@ import { storage } from "../../api/firebase";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
 import { toast, ToastContainer } from "react-toastify";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const UpdateProduct = (props) => {
   //constants
@@ -46,7 +47,15 @@ const UpdateProduct = (props) => {
     if (props.product.instructions !== "") {
       setInstruction(props.product.instructions);
     }
-  }, []);
+  }, [
+    props.product.productName,
+    props.product.productPrice,
+    props.product.productStock,
+    props.product.productDescription,
+    props.product.productCategory,
+    props.product.ingredients,
+    props.product.instructions,
+  ]);
 
   //to delete the ingredients row (+)
   const deleteIngredientRow = (id) => {
@@ -69,30 +78,62 @@ const UpdateProduct = (props) => {
   };
 
   //save images to firebase storage with appropraite link
-  const handleUploadImage = () => {
-    const uploadImage = storage
-      .ref(`images/${productImage.name}`)
-      .put(productImage);
-    uploadImage.on(
-      "state_changed",
-      (snapshot) => {},
-      (error) => {
-        console.log(error);
-      },
-      () => {
-        storage
-          .ref("images")
-          .child(productImage.name)
-          .getDownloadURL()
-          .then((url) => {
-            console.log("image change link", url);
-            setImageUrl(url);
-          });
-      }
-    );
-  };
+  // const handleUploadImage = () => {
+  //   const uploadImage = storage
+  //     .ref(`images/${productImage.name}`)
+  //     .put(productImage);
+  //   uploadImage.on(
+  //     "state_changed",
+  //     (snapshot) => {},
+  //     (error) => {
+  //       console.log(error);
+  //     },
+  //     () => {
+  //       storage
+  //         .ref("images")
+  //         .child(productImage.name)
+  //         .getDownloadURL()
+  //         .then((url) => {
+  //           console.log("image change link", url);
+  //           setImageUrl(url);
+  //         });
+  //     }
+  //   );
+  // };
 
   //passing product values to update product function
+  // const { updateProduct } = useAuth();
+  // const createProduct = async () => {
+  //   if (
+  //     productImage !== "" &&
+  //     productName !== "" &&
+  //     productPrice !== "" &&
+  //     productStock !== "" &&
+  //     productDescription !== "" &&
+  //     productCategory !== "" &&
+  //     ingredients.length !== 0 &&
+  //     instructions.length !== 0
+  //   ) {
+  //     handleUploadImage();
+  //     console.log("image url: ", imageUrl);
+  //     await updateProduct(
+  //       imageUrl,
+  //       productName,
+  //       productPrice,
+  //       productStock,
+  //       productDescription,
+  //       productCategory,
+  //       ingredients,
+  //       instructions
+  //     );
+  //     console.log("Update Product Successfully");
+  //     toast.success("Update Product Successfully");
+  //   } else {
+  //     console.log("Unable to update product");
+  //     toast.error("Unable to update product");
+  //   }
+  // };
+
   const { updateProduct } = useAuth();
   const createProduct = async () => {
     if (
@@ -105,23 +146,30 @@ const UpdateProduct = (props) => {
       ingredients.length !== 0 &&
       instructions.length !== 0
     ) {
-      handleUploadImage();
-      console.log("image url: ", imageUrl);
-      await updateProduct(
-        imageUrl,
-        productName,
-        productPrice,
-        productStock,
-        productDescription,
-        productCategory,
-        ingredients,
-        instructions
-      );
-      console.log("Update Product Successfully");
-      toast.success("Update Product Successfully");
+      const storageDb = getStorage();
+      const productImageRef = ref(storageDb, `images/${productImage.name}`);
+      await uploadBytes(productImageRef, productImage).then((snapshot) => {
+        console.log("Uploaded the image!");
+      });
+      await getDownloadURL(ref(storageDb, productImageRef)).then((url) => {
+        console.log("This us the URL! ", url);
+        updateProduct(
+          props.product.id,
+          url,
+          productName,
+          productPrice,
+          productStock,
+          productDescription,
+          productCategory,
+          ingredients,
+          instructions
+        );
+      });
+      console.log("successfully added new product to firestore");
+      toast.success("Upload New Product Successfully");
     } else {
-      console.log("Unable to update product");
-      toast.error("Unable to update product");
+      console.log("Error - unable to add value to firestore");
+      toast.error("Upload New Product Unsuccessfully");
     }
   };
 
