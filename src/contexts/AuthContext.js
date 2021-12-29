@@ -77,16 +77,6 @@ export const AuthProvider = ({ children }) => {
       .catch((error) => {
         console.error(error);
       });
-
-    // try {
-    //   sendPasswordResetEmail(auth, email, {
-    //     url: "http://localhost:3000/",
-    //   });
-    //   alert("Password reset link sent!");
-    // } catch (err) {
-    //   console.error(err);
-    //   alert(err.message);
-    // }
   };
 
   //add new user to firestore
@@ -136,7 +126,7 @@ export const AuthProvider = ({ children }) => {
     ingredients,
     instructions
   ) => {
-    const docRef = await updateDoc(doc(db, "products", productId), {
+    await updateDoc(doc(db, "products", productId), {
       productImage: productImage,
       productName: productName,
       productPrice: productPrice,
@@ -159,9 +149,43 @@ export const AuthProvider = ({ children }) => {
     await deleteDoc(doc(db, "products", id));
   };
 
+  //add user feedback to firestore
+  // const addFeedback = async (
+  //   feedbackProductName,
+  //   feedbackComment,
+  //   feedbackDateTime
+  // ) => {
+  //   const docRef = await addDoc(collection(db, "feedbacks"), {
+  //     feedbackProductName: feedbackProductName,
+  //     feedbackComment: feedbackComment,
+  //     feedbackDateTime: feedbackDateTime,
+  //   });
+  //   console.log("Successfully added - This is the ID: ", docRef.id);
+  // };
+
+  //add contact us details to firestore
+  const contactUs = async (
+    contactName,
+    contactEmail,
+    contactPhoneNo,
+    contactSubject,
+    contactComment
+  ) => {
+    const docRef = await addDoc(collection(db, "contactUs"), {
+      contactName: contactName,
+      contactEmail: contactEmail,
+      contactPhoneNo: contactPhoneNo,
+      contactSubject: contactSubject,
+      contactComment: contactComment,
+    });
+    console.log("Successfully added contact us to firestore - ", docRef.id);
+  };
+
   //allows thoe function to be called later in other pages
   const value = {
     currentUser,
+    contactUs,
+    // addFeedback,
     deleteProduct,
     updateProduct,
     addProduct,

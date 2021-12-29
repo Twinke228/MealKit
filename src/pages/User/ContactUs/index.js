@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Form, Row, Col } from "react-bootstrap";
 import SmallBanner from "../../../components/smallBanner";
 import "../../../assets/design/styles.css";
@@ -8,15 +8,51 @@ import {
   faClock,
   faMobileAlt,
 } from "@fortawesome/free-solid-svg-icons";
+import { toast, ToastContainer } from "react-toastify";
+import { useAuth } from "../../../contexts/AuthContext";
 
 const ContactPage = () => {
-  const contactForm = () => {};
+  //constants
+  const [contactName, setContactName] = useState("");
+  const [contactEmail, setContactEmail] = useState("");
+  const [contactPhoneNo, setContactPhoneNo] = useState("");
+  const [contactSubject, setContactSubject] = useState("");
+  const [contactComment, setContactComment] = useState("");
+
+  //passing values to contactUs function
+  const { contactUs } = useAuth();
+  const contactForm = async () => {
+    if (
+      contactName !== "" &&
+      contactEmail !== "" &&
+      contactPhoneNo !== "" &&
+      contactSubject !== "" &&
+      contactComment !== ""
+    ) {
+      await contactUs(
+        contactName,
+        contactEmail,
+        contactPhoneNo,
+        contactSubject,
+        contactComment
+      );
+      console.log("successfully added contactUs to firestore");
+      toast.success(
+        "Thank you for contacting us! We will get back to you via email soon."
+      );
+    } else {
+      console.log("Error - unable to add contactUs to firestore");
+      toast.error("Error Occured");
+    }
+  };
+
   return (
     <Container fluid className="p-0 bgBaseColour">
+      <ToastContainer />
       <SmallBanner />
       <Container className="mt-5 pb-5">
         <div className="row">
-          <div className="col-lg-7 mb-3">
+          <div className="col-lg-8 mb-3">
             <p className="brownBoldFont mb-0">Have any questions?</p>
             <p className="mb-3">
               Type your question into our virtual assistant who will help you
@@ -27,18 +63,38 @@ const ContactPage = () => {
               <Form>
                 <Row className="mb-3">
                   <Form.Group as={Col} controlId="formGridName">
-                    <Form.Control type="text" placeholder="Name" />
+                    <Form.Control
+                      type="text"
+                      placeholder="Name"
+                      onChange={(e) => setContactName(e.target.value)}
+                      value={contactName}
+                    />
                   </Form.Group>
                   <Form.Group as={Col} controlId="formGridEmail">
-                    <Form.Control type="email" placeholder="Email" />
+                    <Form.Control
+                      type="email"
+                      placeholder="Email"
+                      onChange={(e) => setContactEmail(e.target.value)}
+                      value={contactEmail}
+                    />
                   </Form.Group>
                 </Row>
                 <Row className="mb-3">
                   <Form.Group as={Col} controlId="formGridMobileNo">
-                    <Form.Control type="text" placeholder="Mobile Number" />
+                    <Form.Control
+                      type="text"
+                      placeholder="Mobile Number"
+                      onChange={(e) => setContactPhoneNo(e.target.value)}
+                      value={contactPhoneNo}
+                    />
                   </Form.Group>
                   <Form.Group as={Col} controlId="formGridSubject">
-                    <Form.Control type="text" placeholder="Subject" />
+                    <Form.Control
+                      type="text"
+                      placeholder="Subject"
+                      onChange={(e) => setContactSubject(e.target.value)}
+                      value={contactSubject}
+                    />
                   </Form.Group>
                 </Row>
 
@@ -48,6 +104,8 @@ const ContactPage = () => {
                       as="textarea"
                       placeholder="Leave a comment here"
                       style={{ height: "200px" }}
+                      onChange={(e) => setContactComment(e.target.value)}
+                      value={contactComment}
                     />
                   </Form.Group>
                 </Row>
@@ -62,10 +120,7 @@ const ContactPage = () => {
               </Form>
             </div>
           </div>
-          <div
-            className="col-lg-3 offset-1 p-4"
-            style={{ background: "#D6C897" }}
-          >
+          <div className="col-lg-4 p-4" style={{ background: "#D6C897" }}>
             <p className="blacksoftFont">
               {" "}
               <FontAwesomeIcon icon={faMapMarkedAlt} /> Shop Address

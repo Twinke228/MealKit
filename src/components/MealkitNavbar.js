@@ -9,6 +9,7 @@ import {
 import Logo from "../assets/images/logo.png";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import { Badge } from "@material-ui/core";
 
 const MealkitNavbar = () => {
   const { currentUser } = useAuth();
@@ -24,7 +25,7 @@ const MealkitNavbar = () => {
 
   const checkUserBeforeCart = () => {
     if (currentUser !== null) {
-      navigate("/cart");
+      navigate("/addtocart");
     } else {
       navigate("/");
     }
@@ -43,13 +44,16 @@ const MealkitNavbar = () => {
             <Nav.Link href="/aboutus">About Us</Nav.Link>
             <Nav.Link href="/contact">Contact</Nav.Link>
             <Nav.Link href="/productcatalogue">Our Menu</Nav.Link>
+            <Nav.Link href="/feedback">Feedback</Nav.Link>
           </Nav>
           <Nav className="gap-3">
             <Nav.Link href="/search">
               <FontAwesomeIcon icon={faSearch} />
             </Nav.Link>
             <Nav.Link onClick={checkUserBeforeCart}>
-              <FontAwesomeIcon icon={faShoppingCart} />
+              <Badge badgeContent={2} colour="secondary">
+                <FontAwesomeIcon icon={faShoppingCart} />
+              </Badge>
             </Nav.Link>
             <Nav.Link onClick={checkUserBeforeAcc}>
               <FontAwesomeIcon icon={faUser} />

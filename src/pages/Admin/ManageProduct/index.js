@@ -132,7 +132,7 @@ const MngProductPage = () => {
                                 onClick={() => {
                                   const clickedProduct = prod;
                                   setProduct(clickedProduct);
-                                  console.log("poraporp ", product);
+                                  console.log("product ", product);
                                   setModalShow(true);
                                 }}
                               >

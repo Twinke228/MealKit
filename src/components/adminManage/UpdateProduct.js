@@ -3,7 +3,6 @@ import { Col, Container, Form, Row } from "react-bootstrap";
 import "../../assets/design/styles.css";
 import { useAuth } from "../../contexts/AuthContext";
 import { List, ListItem, ListItemText } from "@mui/material";
-import { storage } from "../../api/firebase";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
 import { toast, ToastContainer } from "react-toastify";
@@ -23,7 +22,6 @@ const UpdateProduct = (props) => {
   const [productDescription, setProductDescription] = useState("");
   const [productCategory, setProductCategory] = useState("Chinese");
   const [productImage, setProductImage] = useState(null);
-  const [imageUrl, setImageUrl] = useState("");
 
   useEffect(() => {
     if (props.product.productName !== "") {
@@ -135,7 +133,7 @@ const UpdateProduct = (props) => {
   // };
 
   const { updateProduct } = useAuth();
-  const createProduct = async () => {
+  const resetProduct = async () => {
     if (
       productImage !== "" &&
       productName !== "" &&
@@ -370,7 +368,7 @@ const UpdateProduct = (props) => {
               <button
                 className="w-100 mb-3 button"
                 type="button"
-                onClick={createProduct}
+                onClick={resetProduct}
               >
                 Update Menu
               </button>
