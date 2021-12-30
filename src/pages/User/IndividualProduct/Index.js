@@ -2,17 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import "../../../assets/design/styles.css";
 import SmallBanner from "../../../components/smallBanner";
-import WhyChooseUs from "../../../assets/images/whyChooseUs.jpg";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useAuth } from "../../../contexts/AuthContext";
 
 const IndividualProductPage = (props) => {
-  const [product, setProduct] = useState(null);
-  const navigate = useNavigate();
+  //constants
+  const { currentUser, addToCart } = useAuth();
   const { state } = useLocation();
-
-  const addToCart = () => {
-    navigate("/");
-  };
 
   return (
     <Container fluid className="p-0 bgBaseColour">
@@ -23,17 +19,25 @@ const IndividualProductPage = (props) => {
             <img
               src={state.productImage}
               alt={state.productName}
-              className="w-100 h-100"
+              style={{
+                heigth: "50%",
+                display: "block",
+                marginLeft: "auto",
+                marginRight: "auto",
+                width: "50%",
+              }}
             />
           </div>
 
-          <div className="col-lg-6 justify-content-around">
+          <div className="col-lg-6 justify-content-around pt-3">
             <p className="brownBoldFont mb-0">{state.productName}</p>
             <p className="brownBoldFont h5 pt-2">RM 8</p>
             <p className=" pt-2 mb-5">{state.productDescription}</p>
             <button
               className="w-100 mb-3 btnLink"
-              onClick={addToCart}
+              onClick={() => {
+                addToCart(currentUser.uid, state, 1);
+              }}
               type="submit"
             >
               Add to Cart
@@ -77,10 +81,13 @@ const IndividualProductPage = (props) => {
         </div>
 
         <div className="row p-5 justify-content-center ">
-          <div className="col-lg-5">
+          <div
+            className="text-center"
+            style={{ width: "500px", height: "400px" }}
+          >
             <iframe
-              width="560"
-              height="315"
+              width="100%"
+              height="100%"
               src="https://www.youtube.com/embed/DnNsGCX2aYc"
               title="Reference: Cookin1 (2019)"
               frameborder="0"

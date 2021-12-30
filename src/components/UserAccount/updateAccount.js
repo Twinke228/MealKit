@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Col, Container, Form, Row } from "react-bootstrap";
+import { Container, Form } from "react-bootstrap";
 import "../../assets/design/styles.css";
 import { useAuth } from "../../contexts/AuthContext";
-import { List, ListItem, ListItemText } from "@mui/material";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
 import { toast, ToastContainer } from "react-toastify";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const UpdateAccount = (props) => {
   //constants
@@ -30,12 +26,7 @@ const UpdateAccount = (props) => {
     if (props.user.phoneNumber !== "") {
       setPhoneNumber(props.user.phoneNumber);
     }
-  }, [
-    props.user.firstName,
-    props.user.lastName,
-    props.user.email,
-    props.user.phoneNumber,
-  ]);
+  }, []);
 
   //update user profile
   const { updateUser } = useAuth();

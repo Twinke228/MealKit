@@ -1,3 +1,4 @@
+import React, { useContext, useState, useEffect, createContext } from "react";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -5,7 +6,6 @@ import {
   signOut,
   sendPasswordResetEmail,
 } from "@firebase/auth";
-import React, { useContext, useState, useEffect, createContext } from "react";
 import {
   collection,
   doc,
@@ -208,9 +208,26 @@ export const AuthProvider = ({ children }) => {
     console.log("Successfully added contact us to firestore - ", docRef.id);
   };
 
+  //add to cart
+  const addToCart = async (userId, product, quantity) => {
+    const docRef = await addDoc(collection(db, "cart"), {
+      userId: userId,
+      productId: product.id,
+      productImage: product.productImage,
+      productName: product.productName,
+      productPrice: product.productPrice,
+      quantity: quantity,
+    });
+    console.log(
+      "Successfully added to cart - This is the cart ID: ",
+      docRef.id
+    );
+  };
+
   //allows thoe function to be called later in other pages
   const value = {
     currentUser,
+    addToCart,
     contactUs,
     // addFeedback,
     deleteProduct,
