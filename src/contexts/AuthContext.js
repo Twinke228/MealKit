@@ -90,6 +90,11 @@ export const AuthProvider = ({ children }) => {
     console.log("This is the ID: ", docRef.id);
   };
 
+  //delete user
+  const deleteUser = async (id) => {
+    await deleteDoc(doc(db, "users", id));
+  };
+
   //add new product to firestore
   const addProduct = async (
     productImage,
@@ -189,6 +194,7 @@ export const AuthProvider = ({ children }) => {
     deleteProduct,
     updateProduct,
     addProduct,
+    deleteUser,
     addNewUser,
     signup,
     login,

@@ -76,8 +76,19 @@ const IndividualProductPage = (props) => {
           </div>
         </div>
 
-        <div className="row pt-5  justify-content-center  ">
-          <div className="row ">VIDEO</div>
+        <div className="row p-5 justify-content-center ">
+          <div className="col-lg-5">
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/DnNsGCX2aYc"
+              title="Reference: Cookin1 (2019)"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullScreen
+            ></iframe>
+            <p className="greySoftText">Cookin1 (2019)</p>
+          </div>
         </div>
       </Container>
     </Container>

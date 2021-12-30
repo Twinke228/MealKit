@@ -1,23 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Form } from "react-bootstrap";
 import "../../../assets/design/styles.css";
 import SmallBanner from "../../../components/smallBanner";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { faAlignJustify, faEdit } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from "../../../contexts/AuthContext";
+import { getDocs } from "firebase/firestore";
+import { collection } from "firebase/firestore";
+import { db } from "../../../api/firebase";
 
 const AccountPage = () => {
   //constances
   const navigate = useNavigate();
   const { logout } = useAuth();
-
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [users, setUsers] = useState([]);
+  const userCollectionRef = collection(db, "users");
 
   // logout user
   const logoutUser = () => {
@@ -35,8 +39,25 @@ const AccountPage = () => {
     navigate("../trackingorder");
   };
 
-  //edit personal details
-  const editUserProfile = () => {
+  //fetch user details
+  const fetchData = async () => {
+    console.log("Fetching...");
+    const querySnapshot = await getDocs(userCollectionRef);
+    querySnapshot.forEach((doc) => {
+      const userData = doc.data();
+      userData.id = doc.id;
+      setUsers((user) => [...user, userData]);
+    });
+  };
+
+  // load fetchData once page render and set user details
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  //update user details
+  const { updateUser } = useAuth();
+  const editUserProfile = async () => {
     if (
       firstName !== "" &&
       lastName !== "" &&
@@ -45,7 +66,7 @@ const AccountPage = () => {
       password !== "" &&
       confirmPassword !== ""
     ) {
-      navigate("/");
+      updateUser(firstName, lastName, email, phoneNumber);
     }
   };
 
