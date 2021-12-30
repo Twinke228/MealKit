@@ -1,22 +1,34 @@
 import React, { useEffect, useState } from "react";
-import { Container, Image } from "react-bootstrap";
+import { Button, Container, Form, Image, Modal } from "react-bootstrap";
 import "../../../assets/design/styles.css";
 import SmallBanner from "../../../components/smallBanner";
 import CartImage from "../../../../src/assets/images/cart.jpg";
 import { useAuth } from "../../../contexts/AuthContext";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDocs,
+  query,
+  updateDoc,
+  where,
+} from "firebase/firestore";
 import { db } from "../../../api/firebase";
-import { useLocation } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { toast, ToastContainer } from "react-toastify";
+import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 const AddToCartPage = (props) => {
   //constants
   const [cart, setCart] = useState([]);
+  const [product, setProduct] = useState(null);
+  const [modalShow, setModalShow] = useState(false);
+  const navigate = useNavigate();
   const { currentUser } = useAuth();
   const q = query(
     collection(db, "cart"),
     where("userId", "==", currentUser.uid)
   );
-  const { state } = useLocation();
 
   // fetch cart details
   const fetchCartData = async () => {
@@ -29,13 +41,115 @@ const AddToCartPage = (props) => {
     });
   };
 
+  // update quantity to firestore
+  const updateQuantity = async (cartId, quant) => {
+    console.log("Updating...");
+    const cartDocRef = doc(db, "cart", cartId);
+    await updateDoc(cartDocRef, {
+      quantity: quant,
+    }).then((response) => {
+      console.log("Cart updated Successfully!");
+      toast.success("Updated Item Quantity!");
+    });
+  };
+
   //render when page load
   useEffect(() => {
     fetchCartData();
   }, []);
 
+  //delete cart
+  const { deleteCart } = useAuth();
+  const removeCart = async (product) => {
+    await deleteCart(product.id);
+    console.log("Delete Cart Item Successfully");
+    toast.success("Delete One Item from Cart");
+  };
+
+  // function for update cart quantity model
+  function UpdateCart(props) {
+    const [quant, setQuant] = useState(0);
+
+    // render when page load - model click
+    useEffect(() => {
+      if (props.cart) {
+        setQuant(props.cart.quantity);
+      }
+    }, []);
+
+    return (
+      <Container>
+        <ToastContainer />
+        <Form autoComplete="off">
+          <Form.Group>
+            <Form.Control
+              className="p-2 mb-3 formInputBox"
+              type="number"
+              value={quant}
+              onChange={(e) => setQuant(e.target.value)}
+            />
+          </Form.Group>
+          <Form.Group>
+            <div className="row">
+              <div>
+                <button
+                  className="w-100 mb-3 button"
+                  type="button"
+                  onClick={() => {
+                    updateQuantity(props.cart.id, quant);
+                  }}
+                >
+                  Update Quantity
+                </button>
+              </div>
+            </div>
+          </Form.Group>
+        </Form>
+      </Container>
+    );
+  }
+
+  // model - pop when user click edit cart
+  function MyVerticallyCenteredModal(props) {
+    return (
+      <Modal
+        {...props}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+            Update Menu
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>
+            <b>Quantity: </b>
+          </p>
+          <UpdateCart cart={product} />
+        </Modal.Body>
+      </Modal>
+    );
+  }
+
+  //function for total amount
+  function total() {
+    let x = 0;
+    cart.map((product) => {
+      x += product.productPrice * product.quantity;
+    });
+    return x;
+  }
+
+  //proceed payment
+  const ProceedPayment = (cart) => {
+    navigate("../payment");
+  };
+
   return (
     <Container fluid className="p-0 bgBaseColour">
+      <ToastContainer />
       <SmallBanner />
       <Container>
         <p className=" text-center pt-5 brownBoldFont">Shopping Cart</p>
@@ -51,6 +165,7 @@ const AddToCartPage = (props) => {
                   <th>Name</th>
                   <th>Quantity</th>
                   <th>Price</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -67,23 +182,47 @@ const AddToCartPage = (props) => {
                       </td>
                       <td>{product.productName}</td>
                       <td>{product.quantity}</td>
-                      <td>{product.productPrice}</td>
+                      <td>{product.quantity * product.productPrice}</td>
+                      <td>
+                        <div className="col-lg-6">
+                          <Button
+                            variant="primary"
+                            onClick={() => {
+                              setProduct(product);
+                              setModalShow(true);
+                            }}
+                          >
+                            <FontAwesomeIcon icon={faEdit} />
+                          </Button>
+                        </div>
+                        <div className="col-lg-6">
+                          <Button
+                            variant="danger"
+                            onClick={() => {
+                              removeCart(product);
+                            }}
+                          >
+                            <FontAwesomeIcon icon={faTrash} />
+                          </Button>
+                        </div>
+                      </td>
                     </tr>
                   );
                 })}
-                <tr>
-                  <td colSpan={2} style={{ textAlign: "center" }}>
-                    {" "}
-                    <button className="btnLink"> Update </button>{" "}
-                  </td>
-                  <td colSpan={2} style={{ textAlign: "center" }}>
-                    {" "}
-                    <button className="button"> Payment </button>{" "}
-                  </td>
-                </tr>
+                <MyVerticallyCenteredModal
+                  show={modalShow}
+                  onHide={() => setModalShow(false)}
+                />
               </tbody>
             </table>
-            <div align="left">test</div>
+            <div align="right">
+              <p className="h6 pt-3">Delivery Fee: Free of Charge</p>
+              <p className="h5">Total Amount: {total()}</p>
+              <button className="button mt-3" onClick={ProceedPayment}>
+                {" "}
+                Proceed Payment{" "}
+              </button>
+            </div>
           </div>
         </div>
       </Container>

@@ -36,7 +36,7 @@ const MngProductPage = () => {
     fetchData();
   }, []);
 
-  //edit product via Modal - react-toastify
+  //edit product via Modal
   function MyVerticallyCenteredModal(props) {
     return (
       <Modal
@@ -135,11 +135,6 @@ const MngProductPage = () => {
                               >
                                 <FontAwesomeIcon icon={faEdit} />
                               </Button>
-
-                              <MyVerticallyCenteredModal
-                                show={modalShow}
-                                onHide={() => setModalShow(false)}
-                              />
                             </div>
                             <div className="col-lg-6">
                               <Button
@@ -161,6 +156,10 @@ const MngProductPage = () => {
             </div>
           </div>
         </div>
+        <MyVerticallyCenteredModal
+          show={modalShow}
+          onHide={() => setModalShow(false)}
+        />
       </Container>
     </Container>
   );

@@ -13,6 +13,7 @@ import ManageUserPage from "../pages/Admin/ManageUser";
 import MngProductPage from "../pages/Admin/ManageProduct";
 import ForgetPasswordPage from "../pages/User/ForgetPassword";
 import AddToCartPage from "../pages/User/AddToCart";
+import PaymentPage from "../pages/User/Payment";
 
 const MealkitRouter = () => {
   return (
@@ -29,6 +30,7 @@ const MealkitRouter = () => {
       <Route path="individualproduct" element={<IndividualProductPage />} />
       <Route path="forgetpassword" element={<ForgetPasswordPage />} />
       <Route path="addtocart" element={<AddToCartPage />} />
+      <Route path="payment" element={<PaymentPage />} />
 
       {/* admin */}
       <Route path="manageuser" element={<ManageUserPage />} />

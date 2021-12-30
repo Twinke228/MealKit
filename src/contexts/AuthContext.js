@@ -224,9 +224,15 @@ export const AuthProvider = ({ children }) => {
     );
   };
 
+  //delete cart
+  const deleteCart = async (id) => {
+    await deleteDoc(doc(db, "cart", id));
+  };
+
   //allows thoe function to be called later in other pages
   const value = {
     currentUser,
+    deleteCart,
     addToCart,
     contactUs,
     // addFeedback,
