@@ -133,7 +133,7 @@ const UpdateProduct = (props) => {
   // };
 
   const { updateProduct } = useAuth();
-  const resetProduct = async () => {
+  const editProduct = async () => {
     if (
       productImage !== "" &&
       productName !== "" &&
@@ -368,7 +368,7 @@ const UpdateProduct = (props) => {
               <button
                 className="w-100 mb-3 button"
                 type="button"
-                onClick={resetProduct}
+                onClick={editProduct}
               >
                 Update Menu
               </button>

@@ -90,6 +90,28 @@ export const AuthProvider = ({ children }) => {
     console.log("This is the ID: ", docRef.id);
   };
 
+  //update user
+  const updateUser = async (
+    userId,
+    firstName,
+    lastName,
+    email,
+    phoneNumber
+  ) => {
+    await updateDoc(doc(db, "users", userId), {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      phoneNumber: phoneNumber,
+    })
+      .then(() => {
+        console.log("Successfully update user: ", email);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   //delete user
   const deleteUser = async (id) => {
     await deleteDoc(doc(db, "users", id));
@@ -195,6 +217,7 @@ export const AuthProvider = ({ children }) => {
     updateProduct,
     addProduct,
     deleteUser,
+    updateUser,
     addNewUser,
     signup,
     login,

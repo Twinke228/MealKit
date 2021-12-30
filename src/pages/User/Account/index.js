@@ -1,27 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { Container, Form } from "react-bootstrap";
+import { Button, Container, Form, Modal } from "react-bootstrap";
 import "../../../assets/design/styles.css";
 import SmallBanner from "../../../components/smallBanner";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAlignJustify, faEdit } from "@fortawesome/free-solid-svg-icons";
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from "../../../contexts/AuthContext";
-import { getDocs } from "firebase/firestore";
-import { collection } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../../api/firebase";
+import UpdateAccount from "../../../components/UserAccount/updateAccount";
 
 const AccountPage = () => {
   //constances
   const navigate = useNavigate();
-  const { logout } = useAuth();
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [users, setUsers] = useState([]);
-  const userCollectionRef = collection(db, "users");
+  const { currentUser, logout } = useAuth();
+  const [user, setUser] = useState(null);
+  const [modalShow, setModalShow] = useState(false);
 
   // logout user
   const logoutUser = () => {
@@ -42,12 +36,11 @@ const AccountPage = () => {
   //fetch user details
   const fetchData = async () => {
     console.log("Fetching...");
-    const querySnapshot = await getDocs(userCollectionRef);
-    querySnapshot.forEach((doc) => {
-      const userData = doc.data();
-      userData.id = doc.id;
-      setUsers((user) => [...user, userData]);
-    });
+    const docSnap = await getDoc(doc(db, "users", currentUser.uid));
+    if (docSnap.exists()) {
+      setUser(docSnap.data());
+      setUser((prevState) => ({ ...prevState, id: currentUser.uid }));
+    }
   };
 
   // load fetchData once page render and set user details
@@ -55,20 +48,30 @@ const AccountPage = () => {
     fetchData();
   }, []);
 
-  //update user details
-  const { updateUser } = useAuth();
-  const editUserProfile = async () => {
-    if (
-      firstName !== "" &&
-      lastName !== "" &&
-      email !== "" &&
-      phoneNumber !== "" &&
-      password !== "" &&
-      confirmPassword !== ""
-    ) {
-      updateUser(firstName, lastName, email, phoneNumber);
-    }
-  };
+  //edit product via Modal - react-toastify
+  function MyVerticallyCenteredModal(props) {
+    return (
+      <Modal
+        {...props}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+            Update Menu
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {/* content */}
+          <UpdateAccount user={user} />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={props.onHide}>Close</Button>
+        </Modal.Footer>
+      </Modal>
+    );
+  }
 
   return (
     <Container fluid className="p-0 bgBaseColour">
@@ -108,72 +111,32 @@ const AccountPage = () => {
                   <p className=" text-left brownBoldFont">Account</p>
                 </div>
                 <div className="col-lg-1">
-                  <FontAwesomeIcon icon={faEdit} />
+                  <FontAwesomeIcon
+                    icon={faEdit}
+                    onClick={() => {
+                      const clickedUser = user;
+                      setUser(clickedUser);
+                      setModalShow(true);
+                    }}
+                  />
+                  <MyVerticallyCenteredModal
+                    show={modalShow}
+                    onHide={() => setModalShow(false)}
+                  />
                 </div>
                 <div className="row justify-center">
-                  <Form>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                      <Form.Control
-                        className="p-2 formInputBox"
-                        type="text"
-                        placeholder="First name"
-                        onChange={(e) => setFirstName(e.target.value)}
-                        value={firstName}
-                      />
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                      <Form.Control
-                        className="p-2 formInputBox"
-                        type="text"
-                        placeholder="Last name"
-                        onChange={(e) => setLastName(e.target.value)}
-                        value={lastName}
-                      />
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                      <Form.Control
-                        className="p-2 formInputBox"
-                        type="text"
-                        placeholder="Email"
-                        onChange={(e) => setEmail(e.target.value)}
-                        value={email}
-                      />
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                      <Form.Control
-                        className="p-2 formInputBox"
-                        type="text"
-                        placeholder="Phone number"
-                        onChange={(e) => setPhoneNumber(e.target.value)}
-                        value={phoneNumber}
-                      />
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicPassword">
-                      <Form.Control
-                        className="p-2 formInputBox"
-                        type="password"
-                        placeholder="Password"
-                        onChange={(e) => setPassword(e.target.value)}
-                        value={password}
-                      />
-                    </Form.Group>
-                    <Form.Group className="mb-5" controlId="formBasicPassword">
-                      <Form.Control
-                        className="p-2 formInputBox"
-                        type="password"
-                        placeholder="Confirm password"
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                        value={confirmPassword}
-                      />
-                    </Form.Group>
-                    <button
-                      className="w-100 mb-3 button"
-                      onClick={editUserProfile}
-                      type="submit"
-                    >
-                      Update
-                    </button>
-                  </Form>
+                  <p>
+                    <b> First Name:</b> {user ? user.firstName : "Not yet"}
+                  </p>
+                  <p>
+                    <b> Last Name:</b> {user ? user.lastName : "Not yet"}
+                  </p>
+                  <p>
+                    <b> Email:</b> {user ? user.email : "Not yet"}
+                  </p>
+                  <p>
+                    <b> Phone Number:</b> {user ? user.phoneNumber : "Not yet"}
+                  </p>
                 </div>
               </div>
             </Container>
