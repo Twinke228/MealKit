@@ -4,7 +4,6 @@ import SmallBanner from "../../../components/smallBanner";
 import "../../../assets/design/styles.css";
 import { useAuth } from "../../../contexts/AuthContext";
 import { toast, ToastContainer } from "react-toastify";
-import ViewFeedbacks from "../Feedback";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../../api/firebase";
 
@@ -12,52 +11,36 @@ const FeedbackPage = () => {
   //constants
   const [productName, setProductName] = useState("");
   const [productComment, setProductComment] = useState("");
-  //constants
   const [products, setProducts] = useState([]);
-  const [product, setProduct] = useState(null);
   const productsCollectionRef = collection(db, "products");
 
   // function for displaying product list
-  const fetchData = async () => {
+  const fetchProductData = async () => {
     const querySnapshot = await getDocs(productsCollectionRef);
     querySnapshot.forEach((doc) => {
-      const productData = doc.data();
-      productData.id = doc.id;
-      setProducts((product) => [...product, productData]);
+      const feedbackData = doc.data();
+      feedbackData.id = doc.id;
+      setProducts((feedback) => [...feedback, feedbackData]);
     });
   };
 
   //load fetchData once the page is render
   useEffect(() => {
-    fetchData();
+    fetchProductData();
   }, []);
 
   //passing details to add feedback
-  // const { addFeedback } = useAuth();
-  // const submitFeedback = async () => {
-  //   if (productName !== "" && productComment !== "") {
-  //     addFeedback(productName, productComment, inputDT);
-  //     console.log("Feedback successfully added");
-  //     toast.success("Feedback successfully added");
-  //   } else {
-  //     console.log("Feedback submission fail");
-  //     toast.success("Feedback submission fail");
-  //   }
-  // };
+  const { addFeedback } = useAuth();
 
-  const datetime = () => {
-    var showdate = new Date();
-    var displaytodaydate =
-      showdate.getDate() +
-      "/" +
-      showdate.getMonth() +
-      "/" +
-      showdate.getFullYear();
-    return (
-      <div>
-        <input type="text" value={displaytodaydate} readOnly="true" />
-      </div>
-    );
+  const submitFeedback = async () => {
+    if (productName !== "" && productComment !== "") {
+      addFeedback(productName, productComment);
+      console.log("Feedback successfully added");
+      toast.success("Feedback successfully added");
+    } else {
+      console.log("Feedback submission fail");
+      toast.error("Feedback submission fail, please try again.");
+    }
   };
 
   return (
@@ -101,14 +84,13 @@ const FeedbackPage = () => {
 
             <button
               className="w-100 mb-3 button mt-5"
-              //onClick={submitFeedback}
-              type="submit"
+              onClick={submitFeedback}
+              type="button"
             >
               Submit Feedback
             </button>
           </Form>
         </div>
-        {/* <ViewFeedbacks /> */}
       </Container>
     </Container>
   );

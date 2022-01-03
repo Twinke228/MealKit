@@ -25,8 +25,13 @@ const Footer = () => {
             <p className="h2 mb-3">Pages</p>
             <ul>
               <li>
-                <Link to="/ourmenu" className="linkTxtColor">
+                <Link to="/productcatalogue" className="linkTxtColor">
                   Menu
+                </Link>
+              </li>
+              <li>
+                <Link to="/feedback" className="linkTxtColor">
+                  Feedback
                 </Link>
               </li>
               <li>
@@ -40,7 +45,17 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/admin" className="linkTxtColor">
+                <Link to="/" className="linkTxtColor">
+                  Login
+                </Link>
+              </li>
+              <li>
+                <Link to="/register" className="linkTxtColor">
+                  Register
+                </Link>
+              </li>
+              <li>
+                <Link to="/" className="linkTxtColor">
                   Admin
                 </Link>
               </li>

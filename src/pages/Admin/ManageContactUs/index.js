@@ -10,18 +10,18 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from "../../../contexts/AuthContext";
 import { toast, ToastContainer } from "react-toastify";
 
-const ManageUserPage = () => {
+const ManageContactUsPage = () => {
   //constants
-  const [users, setUsers] = useState([]);
-  const usersCollectionRef = collection(db, "users");
+  const [contactUs, setContactUs] = useState([]);
+  const contactUsCollectionRef = collection(db, "contactUs");
 
-  // function for displaying user list
+  // function for displaying contact us  list
   const fetchData = async () => {
-    const querySnapshot = await getDocs(usersCollectionRef);
+    const querySnapshot = await getDocs(contactUsCollectionRef);
     querySnapshot.forEach((doc) => {
-      const userData = doc.data();
-      userData.id = doc.id;
-      setUsers((user) => [...user, userData]);
+      const contactUsData = doc.data();
+      contactUsData.id = doc.id;
+      setContactUs((contactus) => [...contactus, contactUsData]);
     });
   };
 
@@ -31,11 +31,11 @@ const ManageUserPage = () => {
   }, []);
 
   //delete user
-  const { deleteUser } = useAuth();
-  const removeUser = async (prod) => {
-    await deleteUser(prod.id);
-    console.log("Delete User Successfully");
-    toast.success("Delete User Successfully");
+  const { deleteContactUs } = useAuth();
+  const removeContactUs = async (prod) => {
+    await deleteContactUs(prod.id);
+    console.log("Delete Comment Successfully");
+    toast.success("Delete Comment Successfully");
   };
 
   return (
@@ -45,32 +45,34 @@ const ManageUserPage = () => {
       <ManageTab />
       <Container>
         <div className="row">
-          <p className=" text-center pt-5 brownBoldFont">List of User</p>
+          <p className=" text-center pt-5 brownBoldFont">List of Contact Us</p>
           <div className="col-lg-12 p-5">
             <div className="table-wrap">
               <table className="table table-stripped table-sm">
                 <thead className="thead-light">
                   <tr>
-                    <th>First Name</th>
-                    <th>Last Name</th>
+                    <th>Name</th>
                     <th>Email</th>
                     <th>Phone Number</th>
+                    <th>Subject</th>
+                    <th>Comment</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {users.map((prod) => {
+                  {contactUs.map((prod) => {
                     return (
                       <tr key={prod.id}>
-                        <td>{prod.firstName}</td>
-                        <td>{prod.lastName}</td>
-                        <td>{prod.email}</td>
-                        <td>{prod.phoneNumber}</td>
+                        <td>{prod.contactName}</td>
+                        <td>{prod.contactEmail}</td>
+                        <td>{prod.contactPhoneNo}</td>
+                        <td>{prod.contactSubject}</td>
+                        <td>{prod.contactComment}</td>
                         <td>
                           <Button
                             variant="danger"
                             onClick={() => {
-                              removeUser(prod);
+                              removeContactUs(prod);
                             }}
                           >
                             <FontAwesomeIcon icon={faTrash} />
@@ -89,4 +91,4 @@ const ManageUserPage = () => {
   );
 };
 
-export default ManageUserPage;
+export default ManageContactUsPage;

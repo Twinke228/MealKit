@@ -20,6 +20,11 @@
   font-weight: bold;
 }
 
+.brownBoldFontSmall {
+  font-size: 1.5rem;
+  color: #814e4e;
+}
+
 .brownSoftFont {
   font-size: 2rem;
   color: #814e4e;
@@ -47,8 +52,9 @@
 }
 
 .button {
-  background-color: #9c8181;
+  background-color: #43d982;
   border-radius: 1rem;
+  border-color: #43d982;
 }
 
 .bgRegistration {

@@ -15,8 +15,10 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 import { auth, db } from "../api/firebase";
+import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
-const AuthContext = createContext();
+const AuthContext = createContext({});
 
 export const useAuth = () => {
   return useContext(AuthContext);
@@ -26,6 +28,7 @@ export const AuthProvider = ({ children }) => {
   //constances
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   //render once page load
   useEffect(() => {
@@ -59,7 +62,19 @@ export const AuthProvider = ({ children }) => {
 
   //login user check
   const login = (email, password) => {
-    return signInWithEmailAndPassword(auth, email, password);
+    if (email === "twinke_ignasius@gmail.com" && password === "123456789") {
+      toast.success("Welcome Admin - Twinke Ignasius");
+      navigate("/manageuser");
+      return;
+    }
+    signInWithEmailAndPassword(auth, email, password)
+      .then(() => {
+        toast.success("Login Successfully");
+        navigate("/home");
+      })
+      .catch((error) => {
+        toast.error("Login Failed", error);
+      });
   };
 
   //signing out user
@@ -69,10 +84,9 @@ export const AuthProvider = ({ children }) => {
 
   //forget password
   const forgetPassword = async (email) => {
-    console.log("email ", email);
     await sendPasswordResetEmail(auth, email)
       .then(() => {
-        alert("Password reset link sent!");
+        toast.success("Password reset link sent.");
       })
       .catch((error) => {
         console.error(error);
@@ -81,13 +95,14 @@ export const AuthProvider = ({ children }) => {
 
   //add new user to firestore
   const addNewUser = async (firstName, lastName, email, phoneNumber) => {
-    const docRef = await addDoc(collection(db, "users"), {
+    await addDoc(collection(db, "users"), {
       firstName: firstName,
       lastName: lastName,
       email: email,
       phoneNumber: phoneNumber,
+    }).then(() => {
+      toast.success("New user successfully added.");
     });
-    console.log("This is the ID: ", docRef.id);
   };
 
   //update user
@@ -177,18 +192,23 @@ export const AuthProvider = ({ children }) => {
   };
 
   //add user feedback to firestore
-  // const addFeedback = async (
-  //   feedbackProductName,
-  //   feedbackComment,
-  //   feedbackDateTime
-  // ) => {
-  //   const docRef = await addDoc(collection(db, "feedbacks"), {
-  //     feedbackProductName: feedbackProductName,
-  //     feedbackComment: feedbackComment,
-  //     feedbackDateTime: feedbackDateTime,
-  //   });
-  //   console.log("Successfully added - This is the ID: ", docRef.id);
-  // };
+  const addFeedback = async (feedbackProductName, feedbackComment) => {
+    // for capturing the input date and time
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, "0");
+    var mm = String(today.getMonth() + 1).padStart(2, "0"); //January stands for 0
+    var yyyy = today.getFullYear();
+
+    var currentDate = `${mm}/${dd}/${yyyy} ${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`;
+
+    // add data
+    const docRef = await addDoc(collection(db, "feedbacks"), {
+      feedbackProductName: feedbackProductName,
+      feedbackComment: feedbackComment,
+      feedbackDateTime: currentDate,
+    });
+    console.log("Successfully added - This is the ID: ", docRef.id);
+  };
 
   //add contact us details to firestore
   const contactUs = async (
@@ -206,6 +226,11 @@ export const AuthProvider = ({ children }) => {
       contactComment: contactComment,
     });
     console.log("Successfully added contact us to firestore - ", docRef.id);
+  };
+
+  //delete contact us
+  const deleteContactUs = async (id) => {
+    await deleteDoc(doc(db, "contactUs", id));
   };
 
   //add to cart
@@ -229,13 +254,52 @@ export const AuthProvider = ({ children }) => {
     await deleteDoc(doc(db, "cart", id));
   };
 
-  //allows thoe function to be called later in other pages
+  //add order
+  const addOrder = async (userId, cart, paymentDetails, status) => {
+    await addDoc(collection(db, "orders"), {
+      userId: userId,
+      cart: cart,
+      paymentDetails: paymentDetails,
+      status: status,
+    })
+      .then((response) => {
+        console.log("Added to Order Database Successfully");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  //delete order
+  const deleteOrder = async (id) => {
+    await deleteDoc(doc(db, "orders", id));
+  };
+
+  //update order status
+  const updateOrder = async (orderId, status) => {
+    await updateDoc(doc(db, "orders", orderId), {
+      status: status,
+    })
+      .then(() => {
+        console.log("Successfully update order status: ", status);
+        toast.success("Update Order Status Successfully");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  //allows those function to be called later in other pages
   const value = {
     currentUser,
+    updateOrder,
+    deleteOrder,
+    addOrder,
     deleteCart,
     addToCart,
+    deleteContactUs,
     contactUs,
-    // addFeedback,
+    addFeedback,
     deleteProduct,
     updateProduct,
     addProduct,
@@ -250,7 +314,8 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider value={value}>
-      {!loading && children}
+      <ToastContainer />
+      {children}
     </AuthContext.Provider>
   );
 };

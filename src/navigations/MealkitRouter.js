@@ -14,6 +14,11 @@ import MngProductPage from "../pages/Admin/ManageProduct";
 import ForgetPasswordPage from "../pages/User/ForgetPassword";
 import AddToCartPage from "../pages/User/AddToCart";
 import PaymentPage from "../pages/User/Payment";
+import TrackingOrderPage from "../pages/User/TrackingOrder";
+import OrderSuccessfulPage from "../pages/User/OrderSuccessful";
+import ManageOrderPage from "../pages/Admin/ManageOrder";
+import ManageContactUsPage from "../pages/Admin/ManageContactUs";
+import ViewFeedbackPage from "../pages/User/ViewFeedBack";
 
 const MealkitRouter = () => {
   return (
@@ -26,15 +31,20 @@ const MealkitRouter = () => {
       <Route path="aboutus" element={<AboutUsPage />} />
       <Route path="contact" element={<ContactPage />} />
       <Route path="feedback" element={<FeedbackPage />} />
+      <Route path="viewfeedback" element={<ViewFeedbackPage />} />
       <Route path="productcatalogue" element={<ProductCataloguePage />} />
       <Route path="individualproduct" element={<IndividualProductPage />} />
       <Route path="forgetpassword" element={<ForgetPasswordPage />} />
       <Route path="addtocart" element={<AddToCartPage />} />
       <Route path="payment" element={<PaymentPage />} />
+      <Route path="trackingorder" element={<TrackingOrderPage />} />
+      <Route path="ordersuccessful" element={<OrderSuccessfulPage />} />
 
       {/* admin */}
       <Route path="manageuser" element={<ManageUserPage />} />
       <Route path="manageproduct" element={<MngProductPage />} />
+      <Route path="manageorder" element={<ManageOrderPage />} />
+      <Route path="managecontactus" element={<ManageContactUsPage />} />
     </Routes>
   );
 };

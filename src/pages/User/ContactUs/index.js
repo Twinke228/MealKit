@@ -113,7 +113,7 @@ const ContactPage = () => {
                 <button
                   className="w-100 mb-5 mt-5 button"
                   onClick={contactForm}
-                  type="submit"
+                  type="button"
                 >
                   Submit
                 </button>

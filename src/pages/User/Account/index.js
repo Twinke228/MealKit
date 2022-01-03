@@ -102,7 +102,7 @@ const AccountPage = () => {
             </div>
           </Container>
           <div className="col-lg-7 mb-3">
-            <Container fluid>
+            <Container fluid className="pt-5">
               <div className="row justify-center">
                 <div className="col-lg-11">
                   <p className=" text-left brownBoldFont">Account</p>

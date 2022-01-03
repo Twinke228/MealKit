@@ -31,14 +31,14 @@ const IndividualProductPage = (props) => {
 
           <div className="col-lg-6 justify-content-around pt-3">
             <p className="brownBoldFont mb-0">{state.productName}</p>
-            <p className="brownBoldFont h5 pt-2">RM 8</p>
+            <p className="brownBoldFont h5 pt-2">RM {state.productPrice}</p>
             <p className=" pt-2 mb-5">{state.productDescription}</p>
             <button
               className="w-100 mb-3 btnLink"
               onClick={() => {
                 addToCart(currentUser.uid, state, 1);
               }}
-              type="submit"
+              type="button"
             >
               Add to Cart
             </button>
@@ -62,7 +62,9 @@ const IndividualProductPage = (props) => {
             <div>
               <ul className="">
                 {state.ingredients.map((item, id) => (
-                  <li key={id}>{item.ingredients}</li>
+                  <li key={id}>
+                    {item.value} - {item.name}
+                  </li>
                 ))}
               </ul>
             </div>
@@ -73,8 +75,10 @@ const IndividualProductPage = (props) => {
           <div className="row ">
             <p className="brownBoldFont font-weight-bold  ">Instructions:</p>
             <div className="row">
-              {state.instructions.map((item) => (
-                <p>{item.instructions}</p>
+              {state.instructions.map((item, id) => (
+                <p key={id}>
+                  <b>{item.name} -</b> {item.value}{" "}
+                </p>
               ))}
             </div>
           </div>

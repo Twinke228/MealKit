@@ -28,7 +28,7 @@ const HowItWorks = () => {
           <Card>
             <Card.Img variant="top" src={Hit1} />
             <Card.Body>
-              <Card.Title className="brownBoldFont fw-bold">
+              <Card.Title className="brownBoldFontSmall fw-bold">
                 Choose your meals
               </Card.Title>
               <Card.Text>
@@ -42,7 +42,7 @@ const HowItWorks = () => {
           <Card>
             <Card.Img variant="top" src={Hit2} />
             <Card.Body>
-              <Card.Title className="brownBoldFont fw-bold">
+              <Card.Title className="brownBoldFontSmall fw-bold">
                 Create the perfect box
               </Card.Title>
               <Card.Text>
@@ -56,7 +56,7 @@ const HowItWorks = () => {
           <Card>
             <Card.Img variant="top" src={Hit3} />
             <Card.Body>
-              <Card.Title className="brownBoldFont fw-bold">
+              <Card.Title className="brownBoldFontSmall fw-bold">
                 Get convenient weekly deliveries
               </Card.Title>
               <Card.Text>
@@ -69,7 +69,7 @@ const HowItWorks = () => {
           <Card>
             <Card.Img variant="top" src={Hit4} />
             <Card.Body>
-              <Card.Title className="brownBoldFont fw-bold">
+              <Card.Title className="brownBoldFontSmall fw-bold">
                 Cook seasonal, fresh ingredients
               </Card.Title>
               <Card.Text>

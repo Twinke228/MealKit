@@ -25,6 +25,7 @@ const AddToCartPage = (props) => {
   const [modalShow, setModalShow] = useState(false);
   const navigate = useNavigate();
   const { currentUser } = useAuth();
+
   const q = query(
     collection(db, "cart"),
     where("userId", "==", currentUser.uid)
@@ -53,6 +54,11 @@ const AddToCartPage = (props) => {
     });
   };
 
+  //add more item
+  const LinkBackProductCatalogue = () => {
+    navigate("../ProductCatalogue");
+  };
+
   //render when page load
   useEffect(() => {
     fetchCartData();
@@ -70,7 +76,7 @@ const AddToCartPage = (props) => {
   function UpdateCart(props) {
     const [quant, setQuant] = useState(0);
 
-    // render when page load - model click
+    // render when updateCart being called - model click
     useEffect(() => {
       if (props.cart) {
         setQuant(props.cart.quantity);
@@ -120,13 +126,10 @@ const AddToCartPage = (props) => {
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            Update Menu
+            Update Item Quantity
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>
-            <b>Quantity: </b>
-          </p>
           <UpdateCart cart={product} />
         </Modal.Body>
       </Modal>
@@ -169,26 +172,26 @@ const AddToCartPage = (props) => {
                 </tr>
               </thead>
               <tbody>
-                {cart.map((product, i) => {
+                {cart.map((item, i) => {
                   return (
                     <tr key={i}>
                       <td>
                         <Image
-                          src={product.productImage}
+                          src={item.productImage}
                           width={50}
                           height={50}
                           rounded
                         />
                       </td>
-                      <td>{product.productName}</td>
-                      <td>{product.quantity}</td>
-                      <td>{product.quantity * product.productPrice}</td>
+                      <td>{item.productName}</td>
+                      <td>{item.quantity}</td>
+                      <td>RM {item.quantity * item.productPrice}</td>
                       <td>
                         <div className="col-lg-6">
                           <Button
                             variant="primary"
                             onClick={() => {
-                              setProduct(product);
+                              setProduct(item);
                               setModalShow(true);
                             }}
                           >
@@ -199,7 +202,7 @@ const AddToCartPage = (props) => {
                           <Button
                             variant="danger"
                             onClick={() => {
-                              removeCart(product);
+                              removeCart(item);
                             }}
                           >
                             <FontAwesomeIcon icon={faTrash} />
@@ -215,9 +218,17 @@ const AddToCartPage = (props) => {
                 />
               </tbody>
             </table>
+            <div>
+              <button
+                className="btnLink mt-3"
+                onClick={LinkBackProductCatalogue}
+              >
+                Add Cart
+              </button>
+            </div>
             <div align="right">
               <p className="h6 pt-3">Delivery Fee: Free of Charge</p>
-              <p className="h5">Total Amount: {total()}</p>
+              <p className="h5">Total Amount: RM {total()}</p>
               <button className="button mt-3" onClick={ProceedPayment}>
                 {" "}
                 Proceed Payment{" "}

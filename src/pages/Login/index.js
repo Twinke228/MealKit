@@ -3,7 +3,6 @@ import { Container, Form } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import "../../assets/design/styles.css";
-import { toast, ToastContainer } from "react-toastify";
 
 const LoginPage = () => {
   //constants
@@ -14,36 +13,12 @@ const LoginPage = () => {
   const { currentUser, login } = useAuth();
   const navigate = useNavigate();
 
-  const loginUser = () => {
-    if (email === "twinke_ignasius@gmail.com" && password === "123456789") {
-      navigate("/manageuser");
-    } else if (email !== "" && password !== "") {
-      login(email, password);
-      toast.success("Login Successfully");
-      navigate("/home");
-      // if (email === `$/{auth.email}` && password === `$/{auth.passowrd}`) {
-      //   login(email, password);
-      //   toast.success("Login Successfully");
-      //   navigate("/home");
-      // } else {
-      //   toast.error("Not Registered Yet");
-      //   navigate("/");
-      // }
-    } else {
-      toast.error("Login Failed");
-      navigate("/");
-    }
-  };
-
   if (currentUser !== null) {
     navigate("/home");
   }
 
-  console.log("user: ", currentUser);
-
   return (
     <Container fluid className="bgLogin">
-      <ToastContainer />
       <div className="row justify-center transparent">
         <div className="row justify-center padding12">
           <div className="col-lg-3 offset-lg-3">
@@ -79,8 +54,8 @@ const LoginPage = () => {
               </Form.Group>
               <button
                 className="w-100 mb-3 button"
-                onClick={loginUser}
-                type="submit"
+                onClick={() => login(email, password)}
+                type="button"
               >
                 Login
               </button>

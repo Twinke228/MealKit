@@ -88,9 +88,6 @@ const ProductList = (props) => {
                         disableSpacing
                         className={classes.CardActions}
                       >
-                        <IconButton aria-label="Add to Cart">
-                          <AddShoppingCart />
-                        </IconButton>
                         <IconButton
                           aria-label="View Product Details"
                           onClick={() => {
@@ -145,9 +142,6 @@ const ProductList = (props) => {
                       </div>
                     </CardContent>
                     <CardActions disableSpacing className={classes.CardActions}>
-                      <IconButton aria-label="Add to Cart">
-                        <AddShoppingCart />
-                      </IconButton>
                       <IconButton
                         aria-label="View Product Details"
                         onClick={() => {

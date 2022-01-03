@@ -75,63 +75,7 @@ const UpdateProduct = (props) => {
     }
   };
 
-  //save images to firebase storage with appropraite link
-  // const handleUploadImage = () => {
-  //   const uploadImage = storage
-  //     .ref(`images/${productImage.name}`)
-  //     .put(productImage);
-  //   uploadImage.on(
-  //     "state_changed",
-  //     (snapshot) => {},
-  //     (error) => {
-  //       console.log(error);
-  //     },
-  //     () => {
-  //       storage
-  //         .ref("images")
-  //         .child(productImage.name)
-  //         .getDownloadURL()
-  //         .then((url) => {
-  //           console.log("image change link", url);
-  //           setImageUrl(url);
-  //         });
-  //     }
-  //   );
-  // };
-
-  //passing product values to update product function
-  // const { updateProduct } = useAuth();
-  // const createProduct = async () => {
-  //   if (
-  //     productImage !== "" &&
-  //     productName !== "" &&
-  //     productPrice !== "" &&
-  //     productStock !== "" &&
-  //     productDescription !== "" &&
-  //     productCategory !== "" &&
-  //     ingredients.length !== 0 &&
-  //     instructions.length !== 0
-  //   ) {
-  //     handleUploadImage();
-  //     console.log("image url: ", imageUrl);
-  //     await updateProduct(
-  //       imageUrl,
-  //       productName,
-  //       productPrice,
-  //       productStock,
-  //       productDescription,
-  //       productCategory,
-  //       ingredients,
-  //       instructions
-  //     );
-  //     console.log("Update Product Successfully");
-  //     toast.success("Update Product Successfully");
-  //   } else {
-  //     console.log("Unable to update product");
-  //     toast.error("Unable to update product");
-  //   }
-  // };
-
+  //udpate product
   const { updateProduct } = useAuth();
   const editProduct = async () => {
     if (

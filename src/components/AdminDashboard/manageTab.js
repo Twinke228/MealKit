@@ -5,12 +5,21 @@ import { useNavigate } from "react-router-dom";
 
 const ManageTab = () => {
   const navigate = useNavigate();
+
+  //fucntions to link
   const linkManageUser = () => {
     navigate("../manageuser");
   };
   const linkManageProduct = () => {
     navigate("../manageproduct");
   };
+  const linkManageOrder = () => {
+    navigate("../manageorder");
+  };
+  const linkManageContactUs = () => {
+    navigate("../managecontactus");
+  };
+
   return (
     <Container fluid className="p-0">
       <p className="brownBoldFont"></p>
@@ -34,22 +43,22 @@ const ManageTab = () => {
               Manage Product
             </button>
           </div>
-          <div className="col-lg-3 text-center">
-            <button
-              className="w-100 mb-2 linkMngeProd linkTxtColorBold text-uppercase"
-              onClick={linkManageUser}
-              type="submit"
-            >
-              Manage Cart
-            </button>
-          </div>
           <div className="col-lg-3 text-center ">
             <button
               className="w-100  mb-2 linkMngeOrder linkTxtColorBold text-uppercase"
-              onClick={linkManageUser}
+              onClick={linkManageOrder}
               type="submit"
             >
               Manage Order
+            </button>
+          </div>
+          <div className="col-lg-3 text-center">
+            <button
+              className="w-100 mb-2 linkMngeProd linkTxtColorBold text-uppercase"
+              onClick={linkManageContactUs}
+              type="submit"
+            >
+              Manage Contact Us
             </button>
           </div>
         </div>

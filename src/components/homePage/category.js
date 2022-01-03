@@ -25,7 +25,9 @@ const Category = () => {
           <Card>
             <Card.Img variant="top" src={ChineseFood} />
             <Card.Body>
-              <Card.Title className="brownBoldFont fw-bold">Chinese</Card.Title>
+              <Card.Title className="brownBoldFontSmall fw-bold">
+                Chinese
+              </Card.Title>
               <Card.Text>
                 Our chinese food recipes are all taste very authentic and comes
                 with variety of choices to choose from.
@@ -37,7 +39,9 @@ const Category = () => {
           <Card>
             <Card.Img variant="top" src={WesternFood} />
             <Card.Body>
-              <Card.Title className="brownBoldFont fw-bold">Western</Card.Title>
+              <Card.Title className="brownBoldFontSmall fw-bold">
+                Western
+              </Card.Title>
               <Card.Text>
                 Western food arethe easiest dish to cook in our available menu
                 yet it still provides a restaurant taste.
@@ -49,7 +53,7 @@ const Category = () => {
           <Card>
             <Card.Img variant="top" src={VegetarianFood} />
             <Card.Body>
-              <Card.Title className="brownBoldFont fw-bold">
+              <Card.Title className="brownBoldFontSmall fw-bold">
                 Vegetarian
               </Card.Title>
               <Card.Text>
