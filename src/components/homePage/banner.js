@@ -1,3 +1,11 @@
+/*
+Programmwe Name : Twinke Ignasius - TP054187,  Bachelor in Infomation Technology with a specialism of Mobile Technology (APU3F2105IT-MBT)
+Program Name    : banner.js
+Description     : the first section of the home page whihch shows an images slider 
+First Written on: Saturday, 20-Nov-2021
+Edited on       : Tuesday, 04-Jan-2022
+*/
+
 import React from "react";
 import { Container, Carousel } from "react-bootstrap";
 import slide1 from "../../assets/images/Slide1.JPG";

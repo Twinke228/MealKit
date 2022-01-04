@@ -1,5 +1,13 @@
+/*
+Programmwe Name : Twinke Ignasius - TP054187,  Bachelor in Infomation Technology with a specialism of Mobile Technology (APU3F2105IT-MBT)
+Program Name    : User / Account / index.js
+Description     : this page shows the user details as well as allows user to edit their personal info. Not only that, but it allows to link user to logout, track order and feedback page.
+First Written on: Saturday, 20-Nov-2021
+Edited on       : Tuesday, 04-Jan-2022
+*/
+
 import React, { useEffect, useState } from "react";
-import { Button, Container, Modal } from "react-bootstrap";
+import { Container, Modal } from "react-bootstrap";
 import "../../../assets/design/styles.css";
 import SmallBanner from "../../../components/smallBanner";
 import { useNavigate } from "react-router-dom";

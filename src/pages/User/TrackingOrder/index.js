@@ -1,3 +1,11 @@
+/*
+Programmwe Name : Twinke Ignasius - TP054187,  Bachelor in Infomation Technology with a specialism of Mobile Technology (APU3F2105IT-MBT)
+Program Name    : User / TrackingOrder / index.js
+Description     : this page allows user to see their order status 
+First Written on: Saturday, 20-Nov-2021
+Edited on       : Tuesday, 04-Jan-2022
+*/
+
 import React, { useEffect, useState } from "react";
 import { Container, Image } from "react-bootstrap";
 import "../../../assets/design/styles.css";
@@ -46,8 +54,8 @@ const TrackingOrderPage = () => {
       <SmallBanner />
       <Container>
         <p className=" text-center pt-5 brownBoldFont">Tracking Order</p>
-        <div className="row">
-          <table className="table table-stripped table-sm">
+        <div className="row p-5">
+          <table className="table table-stripped table-sm ">
             <thead className="thead-light">
               <tr>
                 <th>Order ID</th>

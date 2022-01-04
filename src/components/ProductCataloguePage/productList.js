@@ -1,3 +1,11 @@
+/*
+Programmwe Name : Twinke Ignasius - TP054187,  Bachelor in Infomation Technology with a specialism of Mobile Technology (APU3F2105IT-MBT)
+Program Name    : productList.js
+Description     : this files help to filter the data base on the product category and it will be shown in the ProductCataloguePage
+First Written on: Saturday, 20-Nov-2021
+Edited on       : Tuesday, 04-Jan-2022
+*/
+
 import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";

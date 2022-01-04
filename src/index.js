@@ -1,3 +1,11 @@
+/*
+Programmwe Name : Twinke Ignasius - TP054187,  Bachelor in Infomation Technology with a specialism of Mobile Technology (APU3F2105IT-MBT)
+Program Name    : index.js
+Description     : main - provide easy entry points for components which allows to import its parent folder as module.  Hence, it handles the app startup, routing and other functions of your application
+First Written on: Saturday, 20-Nov-2021
+Edited on       : Tuesday, 04-Jan-2022
+*/
+
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";

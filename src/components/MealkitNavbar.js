@@ -1,3 +1,11 @@
+/*
+Programmwe Name : Twinke Ignasius - TP054187,  Bachelor in Infomation Technology with a specialism of Mobile Technology (APU3F2105IT-MBT)
+Program Name    : MealKitNavbar.js
+Description     : this is the main nav bar section of the MealKit web applciaiton 
+First Written on: Saturday, 20-Nov-2021
+Edited on       : Tuesday, 04-Jan-2022
+*/
+
 import React from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -47,7 +55,7 @@ const MealkitNavbar = () => {
           </Nav>
           <Nav className="gap-3">
             <Nav.Link href="/search">
-              <FontAwesomeIcon icon={faSearch} />
+              {/* <FontAwesomeIcon icon={faSearch} /> */}
             </Nav.Link>
             <Nav.Link onClick={checkUserBeforeCart}>
               <FontAwesomeIcon icon={faShoppingCart} />

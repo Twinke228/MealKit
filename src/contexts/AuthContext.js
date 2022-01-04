@@ -1,3 +1,11 @@
+/*
+Programmwe Name : Twinke Ignasius - TP054187,  Bachelor in Infomation Technology with a specialism of Mobile Technology (APU3F2105IT-MBT)
+Program Name    : AuthContext.js
+Description     : this files are all the fucntions that communicate with firebase 
+First Written on: Saturday, 20-Nov-2021
+Edited on       : Tuesday, 04-Jan-2022
+*/
+
 import React, { useContext, useState, useEffect, createContext } from "react";
 import {
   createUserWithEmailAndPassword,
@@ -67,14 +75,24 @@ export const AuthProvider = ({ children }) => {
       navigate("/manageuser");
       return;
     }
-    signInWithEmailAndPassword(auth, email, password)
-      .then(() => {
-        toast.success("Login Successfully");
-        navigate("/home");
-      })
-      .catch((error) => {
-        toast.error("Login Failed", error);
-      });
+    if (email !== "") {
+      if (password !== "") {
+        signInWithEmailAndPassword(auth, email, password)
+          .then(() => {
+            toast.success("Login Successfully");
+            navigate("/home");
+          })
+          .catch((error) => {
+            toast.error("Login Failed", error);
+          });
+      } else {
+        toast.error("Please fill in your password");
+      }
+    } else if (password !== "") {
+      toast.error("Please fill in your email");
+    } else {
+      toast.error("Please fill in your email and password");
+    }
   };
 
   //signing out user
@@ -86,7 +104,7 @@ export const AuthProvider = ({ children }) => {
   const forgetPassword = async (email) => {
     await sendPasswordResetEmail(auth, email)
       .then(() => {
-        toast.success("Password reset link sent.");
+        toast.success("Password reset link sent to your email.");
       })
       .catch((error) => {
         console.error(error);
@@ -242,11 +260,14 @@ export const AuthProvider = ({ children }) => {
       productName: product.productName,
       productPrice: product.productPrice,
       quantity: quantity,
-    });
-    console.log(
-      "Successfully added to cart - This is the cart ID: ",
-      docRef.id
-    );
+    })
+      .then(() => {
+        console.log("An item added to cart firebase");
+        toast.success("Item added to cart");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   //delete cart

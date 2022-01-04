@@ -1,3 +1,11 @@
+/*
+Programmwe Name : Twinke Ignasius - TP054187,  Bachelor in Infomation Technology with a specialism of Mobile Technology (APU3F2105IT-MBT)
+Program Name    : Admin / ManageContactUs/ index.js
+Description     : this page allows admin to view and delete the message from user - "ContactUs Page"
+First Written on: Saturday, 20-Nov-2021
+Edited on       : Tuesday, 04-Jan-2022
+*/
+
 import React, { useEffect, useState } from "react";
 import { Container, Button } from "react-bootstrap";
 import "../../../assets/design/styles.css";

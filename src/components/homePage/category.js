@@ -1,3 +1,11 @@
+/*
+Programmwe Name : Twinke Ignasius - TP054187,  Bachelor in Infomation Technology with a specialism of Mobile Technology (APU3F2105IT-MBT)
+Program Name    : category.js
+Description     : the second section of home page that shows "There's something for everyone"
+First Written on: Saturday, 20-Nov-2021
+Edited on       : Tuesday, 04-Jan-2022
+*/
+
 import React from "react";
 import { Container, Card } from "react-bootstrap";
 import "../../assets/design/styles.css";

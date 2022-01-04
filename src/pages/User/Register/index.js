@@ -1,3 +1,11 @@
+/*
+Programmwe Name : Twinke Ignasius - TP054187,  Bachelor in Infomation Technology with a specialism of Mobile Technology (APU3F2105IT-MBT)
+Program Name    : User / Register / index.js
+Description     : this page allows new user to create their account
+First Written on: Saturday, 20-Nov-2021
+Edited on       : Tuesday, 04-Jan-2022
+*/
+
 import React, { useState } from "react";
 import { Container, Form } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
@@ -77,6 +85,7 @@ const RegisterPage = () => {
               </Form.Group>
               <Form.Group className="mb-3" controlId="registerFormPhoneNo">
                 <Form.Control
+                  required
                   className="p-2 formInputBox"
                   type="text"
                   placeholder="Phone number"

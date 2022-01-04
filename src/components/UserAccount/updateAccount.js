@@ -1,3 +1,11 @@
+/*
+Programmwe Name : Twinke Ignasius - TP054187,  Bachelor in Infomation Technology with a specialism of Mobile Technology (APU3F2105IT-MBT)
+Program Name    : updateAccount.js
+Description     : this is a model that allows user to edit their profile details
+First Written on: Saturday, 20-Nov-2021
+Edited on       : Tuesday, 04-Jan-2022
+*/
+
 import React, { useEffect, useState } from "react";
 import { Container, Form } from "react-bootstrap";
 import "../../assets/design/styles.css";

@@ -1,3 +1,11 @@
+/*
+Programmwe Name : Twinke Ignasius - TP054187,  Bachelor in Infomation Technology with a specialism of Mobile Technology (APU3F2105IT-MBT)
+Program Name    : Footer.js
+Description     : this is the main footer section of the web applicaiton 
+First Written on: Saturday, 20-Nov-2021
+Edited on       : Tuesday, 04-Jan-2022
+*/
+
 import React from "react";
 import { Container } from "react-bootstrap";
 import "../assets/design/styles.css";
@@ -52,11 +60,6 @@ const Footer = () => {
               <li>
                 <Link to="/register" className="linkTxtColor">
                   Register
-                </Link>
-              </li>
-              <li>
-                <Link to="/" className="linkTxtColor">
-                  Admin
                 </Link>
               </li>
             </ul>

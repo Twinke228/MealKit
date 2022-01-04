@@ -1,3 +1,11 @@
+/*
+Programmwe Name : Twinke Ignasius - TP054187,  Bachelor in Infomation Technology with a specialism of Mobile Technology (APU3F2105IT-MBT)
+Program Name    : User / ViewFeedBack / index.js
+Description     : this page allows user and guess to view all the feebacks from other customer (calling a component called - ViewFeedback)
+First Written on: Saturday, 20-Nov-2021
+Edited on       : Tuesday, 04-Jan-2022
+*/
+
 import React from "react";
 import { Container } from "react-bootstrap";
 import ViewFeedback from "../../../components/feedback/viewFeedback";

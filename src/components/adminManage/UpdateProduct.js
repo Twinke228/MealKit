@@ -1,3 +1,11 @@
+/*
+Programmwe Name : Twinke Ignasius - TP054187,  Bachelor in Infomation Technology with a specialism of Mobile Technology (APU3F2105IT-MBT)
+Program Name    : UpdateProduct.js
+Description     : allows admin to edit previous product 
+First Written on: Saturday, 20-Nov-2021
+Edited on       : Tuesday, 04-Jan-2022
+*/
+
 import React, { useEffect, useState } from "react";
 import { Col, Container, Form, Row } from "react-bootstrap";
 import "../../assets/design/styles.css";
@@ -107,11 +115,11 @@ const UpdateProduct = (props) => {
           instructions
         );
       });
-      console.log("successfully added new product to firestore");
-      toast.success("Upload New Product Successfully");
+      console.log("successfully edit product to firestore");
+      toast.success("Edit Product Successfully");
     } else {
-      console.log("Error - unable to add value to firestore");
-      toast.error("Upload New Product Unsuccessfully");
+      console.log("Error - unable to edit value to firestore");
+      toast.error("Enable to edit values");
     }
   };
 

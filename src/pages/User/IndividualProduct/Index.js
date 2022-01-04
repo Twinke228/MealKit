@@ -1,8 +1,16 @@
-import React, { useEffect, useState } from "react";
+/*
+Programmwe Name : Twinke Ignasius - TP054187,  Bachelor in Infomation Technology with a specialism of Mobile Technology (APU3F2105IT-MBT)
+Program Name    : User / IndividualProduct / index.js
+Description     : this page allows user to view a specific details of the selected product and it comes with a fucniton of add to cart 
+First Written on: Saturday, 20-Nov-2021
+Edited on       : Tuesday, 04-Jan-2022
+*/
+
+import React from "react";
 import { Container } from "react-bootstrap";
 import "../../../assets/design/styles.css";
 import SmallBanner from "../../../components/smallBanner";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useAuth } from "../../../contexts/AuthContext";
 
 const IndividualProductPage = (props) => {

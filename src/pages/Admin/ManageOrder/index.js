@@ -1,3 +1,11 @@
+/*
+Programmwe Name : Twinke Ignasius - TP054187,  Bachelor in Infomation Technology with a specialism of Mobile Technology (APU3F2105IT-MBT)
+Program Name    : Admin / ManageOrder/ index.js
+Description     : this page allows admin to view and delete orders. It also contain 1 component which allows admin to edit order status
+First Written on: Saturday, 20-Nov-2021
+Edited on       : Tuesday, 04-Jan-2022
+*/
+
 import React, { useEffect, useState } from "react";
 import { Container, Button, Image, Modal } from "react-bootstrap";
 import "../../../assets/design/styles.css";

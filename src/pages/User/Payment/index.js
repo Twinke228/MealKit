@@ -1,3 +1,11 @@
+/*
+Programmwe Name : Twinke Ignasius - TP054187,  Bachelor in Infomation Technology with a specialism of Mobile Technology (APU3F2105IT-MBT)
+Program Name    : User / Payment / index.js
+Description     : this page shows user the item on their cart and prompt user for thier reciever details and payment details before confirm placing an order
+First Written on: Saturday, 20-Nov-2021
+Edited on       : Tuesday, 04-Jan-2022
+*/
+
 import React, { useEffect, useState } from "react";
 import "../../../assets/design/styles.css";
 import SmallBanner from "../../../components/smallBanner";

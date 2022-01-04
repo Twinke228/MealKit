@@ -1,3 +1,11 @@
+/*
+Programmwe Name : Twinke Ignasius - TP054187,  Bachelor in Infomation Technology with a specialism of Mobile Technology (APU3F2105IT-MBT)
+Program Name    : User / AddToCart / index.js
+Description     : this page shows the user their cart items and allows them to remove and edit their item as well. 
+First Written on: Saturday, 20-Nov-2021
+Edited on       : Tuesday, 04-Jan-2022
+*/
+
 import React, { useEffect, useState } from "react";
 import { Button, Container, Form, Image, Modal } from "react-bootstrap";
 import "../../../assets/design/styles.css";

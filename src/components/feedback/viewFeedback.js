@@ -1,3 +1,11 @@
+/*
+Programmwe Name : Twinke Ignasius - TP054187,  Bachelor in Infomation Technology with a specialism of Mobile Technology (APU3F2105IT-MBT)
+Program Name    : viewFeedback.js
+Description     : allows user to view all the feedback from other customer
+First Written on: Saturday, 20-Nov-2021
+Edited on       : Tuesday, 04-Jan-2022
+*/
+
 import React, { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
 import { db } from "../../api/firebase";

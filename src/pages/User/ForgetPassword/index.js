@@ -1,9 +1,16 @@
+/*
+Programmwe Name : Twinke Ignasius - TP054187,  Bachelor in Infomation Technology with a specialism of Mobile Technology (APU3F2105IT-MBT)
+Program Name    : User / ForgetPassword / index.js
+Description     : this page prompt user their email then send them a link to reset their password. 
+First Written on: Saturday, 20-Nov-2021
+Edited on       : Tuesday, 04-Jan-2022
+*/
+
 import React, { useState } from "react";
 import { Container, Form } from "react-bootstrap";
 import "../../../assets/design/styles.css";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../../contexts/AuthContext";
-import { toast, ToastContainer } from "react-toastify";
 
 const ForgetPasswordPage = () => {
   const [email, setEmail] = useState("");
@@ -13,17 +20,10 @@ const ForgetPasswordPage = () => {
   const forgetPass = () => {
     console.log(email);
     forgetPassword(email);
-    // forgetPassword(email)
-    //   .then((response) => {
-    //     console.log(response);
-    //     toast.success("Email sent, please check your email");
-    //   })
-    //   .catch((e) => console.log("error"));
   };
 
   return (
     <Container fluid className="bgRegistration">
-      <ToastContainer />
       <div className="row justify-center transparent">
         <p className=" text-center pt-5 brownBoldFont">Reset Password</p>
         <p className=" text-center greySoftBoldText">

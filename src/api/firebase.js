@@ -1,3 +1,11 @@
+/*
+Programmwe Name : Twinke Ignasius - TP054187,  Bachelor in Infomation Technology with a specialism of Mobile Technology (APU3F2105IT-MBT)
+Program Name    : firebase.js
+Description     : details of the firebase that allows the app to communicate with the firebase (SDK setup and configuration)
+First Written on: Saturday, 20-Nov-2021
+Edited on       : Saturday, 20-Nov-2021
+*/
+
 import firebase from "firebase/compat/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "@firebase/firestore";

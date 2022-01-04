@@ -1,12 +1,15 @@
+/*
+Programmwe Name : Twinke Ignasius - TP054187,  Bachelor in Infomation Technology with a specialism of Mobile Technology (APU3F2105IT-MBT)
+Program Name    : UpdateOrder.js
+Description     : allows admin to update order status - model 
+First Written on: Saturday, 20-Nov-2021
+Edited on       : Tuesday, 04-Jan-2022
+*/
+
 import React, { useEffect, useState } from "react";
-import { Col, Container, Form, Row } from "react-bootstrap";
+import { Container, Form } from "react-bootstrap";
 import "../../assets/design/styles.css";
 import { useAuth } from "../../contexts/AuthContext";
-import { List, ListItem, ListItemText } from "@mui/material";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
-import { toast, ToastContainer } from "react-toastify";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const UpdateOrder = (props) => {
   //constants

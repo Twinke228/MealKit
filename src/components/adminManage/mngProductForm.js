@@ -1,3 +1,11 @@
+/*
+Programmwe Name : Twinke Ignasius - TP054187,  Bachelor in Infomation Technology with a specialism of Mobile Technology (APU3F2105IT-MBT)
+Program Name    : mngProductForm.js
+Description     : allows admin to add new product
+First Written on: Saturday, 20-Nov-2021
+Edited on       : Tuesday, 04-Jan-2022
+*/
+
 import React, { useState } from "react";
 import { Container, Form, Row, Col } from "react-bootstrap";
 import "../../assets/design/styles.css";

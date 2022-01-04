@@ -1,3 +1,11 @@
+/*
+Programmwe Name : Twinke Ignasius - TP054187,  Bachelor in Infomation Technology with a specialism of Mobile Technology (APU3F2105IT-MBT)
+Program Name    : Login / index.js
+Description     : this page allows user or admin to login to thier dashboard
+First Written on: Saturday, 20-Nov-2021
+Edited on       : Tuesday, 04-Jan-2022
+*/
+
 import React, { useState } from "react";
 import { Container, Form } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
@@ -26,6 +34,7 @@ const LoginPage = () => {
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label className="mb-3 brownBoldFont">Login</Form.Label>
                 <Form.Control
+                  required
                   className="p-2 formInputBox"
                   type="email"
                   placeholder="Enter email"
@@ -37,6 +46,7 @@ const LoginPage = () => {
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Control
+                  required
                   className="p-2 formInputBox"
                   type="password"
                   placeholder="Password"
