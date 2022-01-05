@@ -55,57 +55,59 @@ const TrackingOrderPage = () => {
       <Container>
         <p className=" text-center pt-5 brownBoldFont">Tracking Order</p>
         <div className="row p-5">
-          <table className="table table-stripped table-sm ">
-            <thead className="thead-light">
-              <tr>
-                <th>Order ID</th>
-                <th>Product</th>
-                <th>Name</th>
-                <th>Quantity</th>
-                <th>Total Amount</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {orders.map((order, i) => {
-                return (
-                  <tr key={i}>
-                    <td>{order.id}</td>
-                    <td>
-                      {order.cart.map((product, i) => {
-                        return (
-                          <Image
-                            key={i}
-                            style={{ padding: 4 }}
-                            src={product.productImage}
-                            width={50}
-                            height={50}
-                            rounded
-                          />
-                        );
-                      })}
-                    </td>
-                    <td>
-                      {order.cart.map((product, i) => {
-                        return <p key={i}>{product.productName}</p>;
-                      })}
-                    </td>
-                    <td>
-                      {order.cart.map((product, i) => {
-                        return <p key={i}>{product.quantity} set</p>;
-                      })}
-                    </td>
-                    <td>
-                      <GetTotal cart={order.cart} />
-                    </td>
-                    <td>
-                      <p>{order.status}</p>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+          <div className="table-wrap">
+            <table className="table table-stripped table-sm ">
+              <thead className="thead-light">
+                <tr>
+                  <th>Order ID</th>
+                  <th>Product</th>
+                  <th>Name</th>
+                  <th>Quantity</th>
+                  <th>Total Amount</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {orders.map((order, i) => {
+                  return (
+                    <tr key={i}>
+                      <td>{order.id}</td>
+                      <td>
+                        {order.cart.map((product, i) => {
+                          return (
+                            <Image
+                              key={i}
+                              style={{ padding: 4 }}
+                              src={product.productImage}
+                              width={50}
+                              height={50}
+                              rounded
+                            />
+                          );
+                        })}
+                      </td>
+                      <td>
+                        {order.cart.map((product, i) => {
+                          return <p key={i}>{product.productName}</p>;
+                        })}
+                      </td>
+                      <td>
+                        {order.cart.map((product, i) => {
+                          return <p key={i}>{product.quantity} set</p>;
+                        })}
+                      </td>
+                      <td>
+                        <GetTotal cart={order.cart} />
+                      </td>
+                      <td>
+                        <p>{order.status}</p>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
         </div>
       </Container>
     </Container>

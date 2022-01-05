@@ -60,9 +60,9 @@ Edited on       : Tuesday, 04-Jan-2022
 }
 
 .button {
-  background-color: #43d982;
+  background-color: #9ab059;
   border-radius: 1rem;
-  border-color: #43d982;
+  border-color: #9ab059;
 }
 
 .bgRegistration {
@@ -92,6 +92,7 @@ Edited on       : Tuesday, 04-Jan-2022
 .btnLink {
   background-color: rgb(255, 212, 132);
   border-radius: 1em;
+  border-color: rgb(255, 212, 132);
 }
 
 .btnOut {

@@ -16,8 +16,8 @@ const WeAreMealKit = () => {
       <div className="row">
         <div className="col-lg-6 justify-content-around">
           <iframe
-            width="560"
-            height="315"
+            width="100%"
+            height="100%"
             src="https://www.youtube.com/embed/t6znOolXG34"
             title="Reference: Hello Fresh YouTube Video (2017)"
             frameborder="0"

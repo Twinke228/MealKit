@@ -275,6 +275,13 @@ export const AuthProvider = ({ children }) => {
     await deleteDoc(doc(db, "cart", id));
   };
 
+  const removeCart = (cart) => {
+    cart.forEach(async (product) => {
+      await deleteDoc(doc(db, "cart", product.id));
+    });
+    console.log("carts are deleted");
+  };
+
   //add order
   const addOrder = async (userId, cart, paymentDetails, status) => {
     await addDoc(collection(db, "orders"), {
@@ -317,6 +324,7 @@ export const AuthProvider = ({ children }) => {
     deleteOrder,
     addOrder,
     deleteCart,
+    removeCart,
     addToCart,
     deleteContactUs,
     contactUs,

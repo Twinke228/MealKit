@@ -15,7 +15,7 @@ import { Container, Form, Row, Col, Image } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../contexts/AuthContext";
 import { db } from "../../../api/firebase";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 
 const PaymentPage = (props) => {
   //constants
@@ -29,11 +29,13 @@ const PaymentPage = (props) => {
   const status = "Pending";
   const navigate = useNavigate();
   const [cart, setCarts] = useState([]);
+  const { addOrder, currentUser, removeCart } = useAuth();
   const usersCollectionRef = collection(db, "cart");
+  const q = query(usersCollectionRef, where("userId", "==", currentUser.uid));
 
   // function for displaying user list
   const fetchData = async () => {
-    const querySnapshot = await getDocs(usersCollectionRef);
+    const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
       const cartData = doc.data();
       cartData.id = doc.id;
@@ -42,7 +44,6 @@ const PaymentPage = (props) => {
   };
 
   //add shipping and payment details
-  const { addOrder, currentUser } = useAuth();
   const submitPayment = () => {
     // get all details here and add to order + add a colum of status ("pending")
     const paymentDetails = {
@@ -55,6 +56,7 @@ const PaymentPage = (props) => {
       cardCCV: cardCCV,
     };
     addOrder(currentUser.uid, cart, paymentDetails, status);
+    removeCart(cart);
     toast.success("Order Place!");
     let passData = {
       cart: cart,

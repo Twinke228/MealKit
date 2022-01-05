@@ -34,7 +34,7 @@ const UpdateAccount = (props) => {
     if (props.user.phoneNumber !== "") {
       setPhoneNumber(props.user.phoneNumber);
     }
-  }, []);
+  }, [props.user]);
 
   //update user profile
   const { updateUser } = useAuth();
