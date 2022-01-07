@@ -108,6 +108,7 @@ export const AuthProvider = ({ children }) => {
       })
       .catch((error) => {
         console.error(error);
+        toast.error("Please enter reset email.");
       });
   };
 
@@ -275,6 +276,7 @@ export const AuthProvider = ({ children }) => {
     await deleteDoc(doc(db, "cart", id));
   };
 
+  //remove cart from firebase once user have place order successfully
   const removeCart = (cart) => {
     cart.forEach(async (product) => {
       await deleteDoc(doc(db, "cart", product.id));

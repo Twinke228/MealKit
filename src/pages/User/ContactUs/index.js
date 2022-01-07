@@ -50,7 +50,7 @@ const ContactPage = () => {
       );
     } else {
       console.log("Error - unable to add contactUs to firestore");
-      toast.error("Error Occured");
+      toast.error("Please fill up all the empty filled");
     }
   };
 
@@ -72,6 +72,7 @@ const ContactPage = () => {
                 <Row className="mb-3">
                   <Form.Group as={Col} controlId="formGridName">
                     <Form.Control
+                      required
                       type="text"
                       placeholder="Name"
                       onChange={(e) => setContactName(e.target.value)}
@@ -80,6 +81,7 @@ const ContactPage = () => {
                   </Form.Group>
                   <Form.Group as={Col} controlId="formGridEmail">
                     <Form.Control
+                      required
                       type="email"
                       placeholder="Email"
                       onChange={(e) => setContactEmail(e.target.value)}
@@ -90,6 +92,7 @@ const ContactPage = () => {
                 <Row className="mb-3">
                   <Form.Group as={Col} controlId="formGridMobileNo">
                     <Form.Control
+                      required
                       type="text"
                       placeholder="Mobile Number"
                       onChange={(e) => setContactPhoneNo(e.target.value)}
@@ -98,6 +101,7 @@ const ContactPage = () => {
                   </Form.Group>
                   <Form.Group as={Col} controlId="formGridSubject">
                     <Form.Control
+                      required
                       type="text"
                       placeholder="Subject"
                       onChange={(e) => setContactSubject(e.target.value)}
@@ -109,6 +113,7 @@ const ContactPage = () => {
                 <Row className="mb-3">
                   <Form.Group controlId="formGridComment">
                     <Form.Control
+                      required
                       as="textarea"
                       placeholder="Leave a comment here"
                       style={{ height: "200px" }}

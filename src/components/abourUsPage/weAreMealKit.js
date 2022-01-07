@@ -13,7 +13,7 @@ import "../../assets/design/styles.css";
 const WeAreMealKit = () => {
   return (
     <Container className="mt-5">
-      <div className="row">
+      <div className="row pt-5 pb-5">
         <div className="col-lg-6 justify-content-around">
           <iframe
             width="100%"

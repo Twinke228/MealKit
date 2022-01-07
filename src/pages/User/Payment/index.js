@@ -43,28 +43,40 @@ const PaymentPage = (props) => {
     });
   };
 
-  //add shipping and payment details
+  //add cart item, shipping and payment details then remove cart item from firebase
   const submitPayment = () => {
-    // get all details here and add to order + add a colum of status ("pending")
-    const paymentDetails = {
-      receiverName: receiverName,
-      receiverMobileNo: receiverMobileNo,
-      receiverAddress: receiverAddress,
-      cardNumber: cardNumber,
-      cardExpirationDate: cardExpirationDate,
-      cardExpirationYear: cardExpirationYear,
-      cardCCV: cardCCV,
-    };
-    addOrder(currentUser.uid, cart, paymentDetails, status);
-    removeCart(cart);
-    toast.success("Order Place!");
-    let passData = {
-      cart: cart,
-      paymentDetails: paymentDetails,
-    };
-    navigate("/ordersuccessful", {
-      state: passData,
-    });
+    if (
+      receiverName !== "" &&
+      receiverMobileNo !== "" &&
+      receiverAddress !== "" &&
+      cardNumber !== "" &&
+      cardExpirationDate !== "" &&
+      cardExpirationYear !== "" &&
+      cardCCV !== ""
+    ) {
+      const paymentDetails = {
+        receiverName: receiverName,
+        receiverMobileNo: receiverMobileNo,
+        receiverAddress: receiverAddress,
+        cardNumber: cardNumber,
+        cardExpirationDate: cardExpirationDate,
+        cardExpirationYear: cardExpirationYear,
+        cardCCV: cardCCV,
+      };
+      addOrder(currentUser.uid, cart, paymentDetails, status);
+      removeCart(cart);
+      toast.success("Order Place!");
+      let passData = {
+        cart: cart,
+        paymentDetails: paymentDetails,
+      };
+      navigate("/ordersuccessful", {
+        state: passData,
+      });
+    } else {
+      console.log("empty fill");
+      toast.error("Please fill up the empty filled");
+    }
   };
 
   //cancel payment
@@ -148,6 +160,7 @@ const PaymentPage = (props) => {
               <p className="blacksoftFont">Shipping Details</p>
               <Form.Group>
                 <Form.Control
+                  required
                   className="p-2 mb-3 formInputBox"
                   type="text"
                   value={receiverName}
@@ -159,6 +172,7 @@ const PaymentPage = (props) => {
               </Form.Group>
               <Form.Group>
                 <Form.Control
+                  required
                   className="p-2 mb-3 formInputBox"
                   type="text"
                   value={receiverMobileNo}
@@ -170,6 +184,7 @@ const PaymentPage = (props) => {
               </Form.Group>
               <Form.Group>
                 <Form.Control
+                  required
                   className="p-2 mb-3 formInputBox"
                   type="text"
                   value={receiverAddress}
@@ -182,6 +197,7 @@ const PaymentPage = (props) => {
               <p className="blacksoftFont pt-3">Payment Details</p>
               <Form.Group>
                 <Form.Control
+                  required
                   className="p-2 mb-3 formInputBox"
                   type="text"
                   value={cardNumber}
@@ -194,6 +210,7 @@ const PaymentPage = (props) => {
               <Row>
                 <Form.Group as={Col} className="col-lg-4">
                   <Form.Control
+                    required
                     className="p-2 mb-3 formInputBox"
                     type="text"
                     value={cardExpirationDate}
@@ -205,6 +222,7 @@ const PaymentPage = (props) => {
                 </Form.Group>
                 <Form.Group as={Col} className="col-lg-4">
                   <Form.Control
+                    required
                     className="p-2 mb-3 formInputBox"
                     type="text"
                     value={cardExpirationYear}
@@ -216,6 +234,7 @@ const PaymentPage = (props) => {
                 </Form.Group>
                 <Form.Group as={Col} className="col-lg-4">
                   <Form.Control
+                    required
                     className="p-2 mb-3 formInputBox"
                     type="text"
                     value={cardCCV}

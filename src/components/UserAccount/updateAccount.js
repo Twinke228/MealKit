@@ -50,7 +50,9 @@ const UpdateAccount = (props) => {
       toast.success("Your details have been successfully updated");
     } else {
       console.log("Error - unable to update user profile to firestore");
-      toast.error("Oops! Your details have not been updated");
+      toast.error(
+        "Oops! No empty filled are allowed. Your details have not been updated"
+      );
     }
   };
 

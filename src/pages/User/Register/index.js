@@ -75,12 +75,12 @@ const RegisterPage = () => {
               </Form.Group>
               <Form.Group className="mb-3" controlId="registerFormEmail">
                 <Form.Control
-                  required
                   className="p-2 formInputBox"
                   type="email"
                   placeholder="Email"
                   onChange={(e) => setEmail(e.target.value)}
                   value={email}
+                  required
                 />
               </Form.Group>
               <Form.Group className="mb-3" controlId="registerFormPhoneNo">
@@ -95,22 +95,26 @@ const RegisterPage = () => {
               </Form.Group>
               <Form.Group className="mb-3" controlId="registerFormPassword">
                 <Form.Control
-                  required
                   className="p-2 formInputBox"
                   type="password"
                   placeholder="Password"
                   onChange={(e) => setPassword(e.target.value)}
                   value={password}
+                  pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[#?!@$%^&*-]).{8,}"
+                  title="Must contain at least one number one special character and one uppercase and lowercase letter, and at least 8 or more characters"
+                  required
                 />
               </Form.Group>
               <Form.Group className="mb-5" controlId="registerFormCnfrmPass">
                 <Form.Control
-                  required
                   className="p-2 formInputBox"
                   type="password"
                   placeholder="Confirm password"
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   value={confirmPassword}
+                  pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[#?!@$%^&*-]).{8,}"
+                  title="Must contain at least one number one special character and one uppercase and lowercase letter, and at least 8 or more characters and must be the same as your password"
+                  required
                 />
               </Form.Group>
               <button

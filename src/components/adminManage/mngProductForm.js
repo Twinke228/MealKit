@@ -86,7 +86,9 @@ const MngProductForm = () => {
       toast.success("Upload New Product Successfully");
     } else {
       console.log("Error - unable to add value to firestore");
-      toast.error("Upload New Product Unsuccessfully");
+      toast.error(
+        "Upload New Product Unsuccessfully, no empty input is allowed"
+      );
     }
   };
 

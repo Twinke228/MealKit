@@ -47,7 +47,9 @@ const FeedbackPage = () => {
       toast.success("Feedback successfully added");
     } else {
       console.log("Feedback submission fail");
-      toast.error("Feedback submission fail, please try again.");
+      toast.error(
+        "Feedback submission fail, No empty filled allowed. Please try again."
+      );
     }
   };
 
