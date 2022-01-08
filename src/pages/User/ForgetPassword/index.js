@@ -38,7 +38,6 @@ const ForgetPasswordPage = () => {
               <Form>
                 <Form.Group className="mb-3" controlId="registerFormEmail">
                   <Form.Control
-                    required
                     className="p-2 formInputBox"
                     type="text"
                     placeholder="Email"
@@ -46,6 +45,7 @@ const ForgetPasswordPage = () => {
                       setEmail(e.target.value);
                     }}
                     value={email}
+                    required
                   />
                 </Form.Group>
 
