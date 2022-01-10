@@ -237,12 +237,21 @@ export const AuthProvider = ({ children }) => {
     contactSubject,
     contactComment
   ) => {
+    // for capturing the input date and time
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, "0");
+    var mm = String(today.getMonth() + 1).padStart(2, "0"); //January stands for 0
+    var yyyy = today.getFullYear();
+
+    var currentDate = `${mm}/${dd}/${yyyy} ${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`;
+
     const docRef = await addDoc(collection(db, "contactUs"), {
       contactName: contactName,
       contactEmail: contactEmail,
       contactPhoneNo: contactPhoneNo,
       contactSubject: contactSubject,
       contactComment: contactComment,
+      contactUsDNT: currentDate,
     });
     console.log("Successfully added contact us to firestore - ", docRef.id);
   };
@@ -286,10 +295,19 @@ export const AuthProvider = ({ children }) => {
 
   //add order
   const addOrder = async (userId, cart, paymentDetails, status) => {
+    // for capturing the input date and time
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, "0");
+    var mm = String(today.getMonth() + 1).padStart(2, "0"); //January stands for 0
+    var yyyy = today.getFullYear();
+
+    var currentDate = `${mm}/${dd}/${yyyy} ${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`;
+
     await addDoc(collection(db, "orders"), {
       userId: userId,
       cart: cart,
       paymentDetails: paymentDetails,
+      orderDNT: currentDate,
       status: status,
     })
       .then((response) => {

@@ -3,7 +3,7 @@ Programmwe Name : Twinke Ignasius - TP054187,  Bachelor in Infomation Technology
 Program Name    : Admin / ManageOrder/ index.js
 Description     : this page allows admin to view and delete orders. It also contain 1 component which allows admin to edit order status
 First Written on: Saturday, 20-Nov-2021
-Edited on       : Tuesday, 04-Jan-2022
+Edited on       : Tuesday, 10-Jan-2022
 */
 
 import React, { useEffect, useState } from "react";
@@ -18,17 +18,19 @@ import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from "../../../contexts/AuthContext";
 import { toast, ToastContainer } from "react-toastify";
 import UpdateOrder from "../../../components/adminManage/UpdateOrder";
+import { query, orderBy } from "firebase/firestore";
 
 const ManageOrderPage = () => {
   //constants
   const [orders, setOrders] = useState([]);
   const [orderStatus, setOrderStatus] = useState(null);
   const ordersCollectionRef = collection(db, "orders");
+  const q = query(ordersCollectionRef, orderBy("orderDNT", "desc"));
   const [modalShow, setModalShow] = useState(false);
 
   // function for displaying order
   const fetchData = async () => {
-    const querySnapshot = await getDocs(ordersCollectionRef);
+    const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
       const ordersData = doc.data();
       ordersData.id = doc.id;
@@ -94,6 +96,7 @@ const ManageOrderPage = () => {
                 <thead className="thead-light">
                   <tr>
                     <th>Order ID</th>
+                    <th>Order Date</th>
                     <th>Receiver Name</th>
                     <th>Mobile No</th>
                     <th>Shipping Address</th>
@@ -110,6 +113,7 @@ const ManageOrderPage = () => {
                     return (
                       <tr key={i}>
                         <td>{order.id}</td>
+                        <td>{order.orderDNT}</td>
                         <td>{order.paymentDetails.receiverName}</td>
                         <td>{order.paymentDetails.receiverMobileNo}</td>
                         <td>{order.paymentDetails.receiverAddress}</td>

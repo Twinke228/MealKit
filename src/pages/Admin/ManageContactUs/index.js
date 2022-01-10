@@ -17,6 +17,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from "../../../contexts/AuthContext";
 import { toast, ToastContainer } from "react-toastify";
+import { propTypes } from "react-bootstrap/esm/Image";
 
 const ManageContactUsPage = () => {
   //constants
@@ -59,6 +60,7 @@ const ManageContactUsPage = () => {
               <table className="table table-stripped table-sm">
                 <thead className="thead-light">
                   <tr>
+                    <th>Date and Time</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Phone Number</th>
@@ -71,6 +73,7 @@ const ManageContactUsPage = () => {
                   {contactUs.map((prod) => {
                     return (
                       <tr key={prod.id}>
+                        <td>{prod.contactUsDNT}</td>
                         <td>{prod.contactName}</td>
                         <td>{prod.contactEmail}</td>
                         <td>{prod.contactPhoneNo}</td>
