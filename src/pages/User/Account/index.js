@@ -67,7 +67,7 @@ const AccountPage = () => {
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            Update Menu
+            Update Account
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
